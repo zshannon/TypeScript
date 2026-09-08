@@ -142,7 +142,7 @@ merge_upstream() {
   pre_upstream_head=$(git rev-parse HEAD)
 
   set +e
-  git merge --no-commit --no-ff -m "Merge Microsoft TypeScript upstream main" "$ref"
+  git merge --no-commit --no-ff -m "Merge Microsoft TypeScript stable release" "$ref"
   merge_status=$?
   set -e
 
@@ -195,7 +195,7 @@ merge_upstream() {
     return 2
   fi
 
-  if ! git commit -m "Merge Microsoft TypeScript upstream main"; then
+  if ! git commit -m "Merge Microsoft TypeScript stable release"; then
     echo "error: failed to commit the prepared upstream merge" >&2
     report_merge_failure "Microsoft TypeScript upstream" "$ref"
     return 2

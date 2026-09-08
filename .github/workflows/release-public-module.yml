@@ -1,6 +1,8 @@
 name: Release public Go module
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -22,6 +24,7 @@ jobs:
     permissions:
       contents: read
     outputs:
+      release_needed: ${{ steps.existing.outputs.release_needed }}
       public_tag: ${{ steps.version.outputs.public_tag }}
       source_version: ${{ steps.version.outputs.source_version }}
       tested_sha: ${{ steps.version.outputs.tested_sha }}
@@ -41,13 +44,13 @@ jobs:
             tsc/go.sum
             public/go.sum
 
-      - name: Derive stable TypeScript and public module versions
+      - name: Derive TypeScript and public module versions
         id: version
         run: |
           set -euo pipefail
           source_version=$(go run ./scripts/export-go.go --version)
-          if [[ ! "$source_version" =~ ^v([1-9][0-9]*)\.([0-9]+)\.([0-9]+)$ ]]; then
-            echo "Refuses to publish non-stable TypeScript version: $source_version" >&2
+          if [[ ! "$source_version" =~ ^v([1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "Only stable TypeScript releases can be published: $source_version" >&2
             exit 1
           fi
           public_major=${BASH_REMATCH[1]}
@@ -57,11 +60,13 @@ jobs:
             echo "Generated module path $generated_module does not match TypeScript major $public_major." >&2
             exit 1
           fi
-          echo "source_version=$source_version" >>"$GITHUB_OUTPUT"
-          echo "public_tag=public/$source_version" >>"$GITHUB_OUTPUT"
-          echo "tested_sha=$(git rev-parse HEAD)" >>"$GITHUB_OUTPUT"
+          {
+            echo "source_version=$source_version"
+            echo "public_tag=public/$source_version"
+            echo "tested_sha=$(git rev-parse HEAD)"
+          } >>"$GITHUB_OUTPUT"
 
-      - name: Require the matching official Microsoft tag in ancestry
+      - name: Verify the version against upstream source
         env:
           SOURCE_VERSION: ${{ steps.version.outputs.source_version }}
         run: |
@@ -71,25 +76,29 @@ jobs:
             "+refs/tags/${SOURCE_VERSION}:refs/remotes/microsoft-upstream/tags/${SOURCE_VERSION}"
           upstream_tag="refs/remotes/microsoft-upstream/tags/${SOURCE_VERSION}^{commit}"
           if ! git merge-base --is-ancestor "$upstream_tag" HEAD; then
-            echo "Official Microsoft tag $SOURCE_VERSION is not an ancestor of the selected fork ref." >&2
+            echo "Matching Microsoft source is not an ancestor of the selected fork ref." >&2
             exit 1
           fi
           upstream_commit=$(git rev-parse "$upstream_tag")
           upstream_version=$(git show "${upstream_commit}:tsc/internal/core/version.go" \
             | sed -n 's/^var version = "\([^"]*\)"$/\1/p')
           if [[ "v$upstream_version" != "$SOURCE_VERSION" ]]; then
-            echo "Official tag $SOURCE_VERSION contains compiler version $upstream_version." >&2
+            echo "Upstream source contains compiler version $upstream_version, expected $SOURCE_VERSION." >&2
             exit 1
           fi
 
-      - name: Refuse an existing public tag
+      - name: Check whether this version is already released
+        id: existing
         env:
           PUBLIC_TAG: ${{ steps.version.outputs.public_tag }}
         run: |
           set -euo pipefail
-          if git ls-remote --exit-code --tags origin "refs/tags/$PUBLIC_TAG" >/dev/null 2>&1; then
-            echo "Public module tag already exists: $PUBLIC_TAG" >&2
-            exit 1
+          remote_tags=$(git ls-remote --tags origin "refs/tags/$PUBLIC_TAG")
+          if [[ -n "$remote_tags" ]]; then
+            echo "release_needed=false" >>"$GITHUB_OUTPUT"
+            echo "Version $PUBLIC_TAG is already released; leaving its immutable tag unchanged." >>"$GITHUB_STEP_SUMMARY"
+          else
+            echo "release_needed=true" >>"$GITHUB_OUTPUT"
           fi
 
       - name: Test generator and committed output
@@ -106,6 +115,7 @@ jobs:
   publish:
     name: Tag exact validated fork commit
     needs: validate
+    if: needs.validate.outputs.release_needed == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
@@ -124,8 +134,8 @@ jobs:
       - name: Publish matching public module tag
         run: |
           set -euo pipefail
-          if [[ ! "$SOURCE_VERSION" =~ ^v([1-9][0-9]*)\.([0-9]+)\.([0-9]+)$ ]]; then
-            echo "Invalid validated TypeScript version: $SOURCE_VERSION" >&2
+          if [[ ! "$SOURCE_VERSION" =~ ^v([1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "Refusing non-stable TypeScript version: $SOURCE_VERSION" >&2
             exit 1
           fi
           if [[ "$PUBLIC_TAG" != "public/$SOURCE_VERSION" ]]; then
@@ -136,9 +146,10 @@ jobs:
             echo "Publish checkout does not match the validated commit." >&2
             exit 1
           fi
-          if git ls-remote --exit-code --tags origin "refs/tags/$PUBLIC_TAG" >/dev/null 2>&1; then
-            echo "Public module tag already exists: $PUBLIC_TAG" >&2
-            exit 1
+          remote_tags=$(git ls-remote --tags origin "refs/tags/$PUBLIC_TAG")
+          if [[ -n "$remote_tags" ]]; then
+            echo "Version $PUBLIC_TAG was already published; leaving its tag unchanged." >>"$GITHUB_STEP_SUMMARY"
+            exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

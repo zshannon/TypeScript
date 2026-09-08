@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "forkProcessing": "enabled",
+  "enabledManagers": ["custom.regex"],
+  "dependencyDashboard": false,
+  "automerge": false,
+  "draftPR": true,
+  "rebaseWhen": "never",
+  "prConcurrentLimit": 1,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^\\.github\\/upstream-version$/"],
+      "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
+      "depNameTemplate": "microsoft/TypeScript",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver-coerced"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["microsoft/TypeScript"],
+      "allowedVersions": "/^v?[0-9]+\\.[0-9]+\\.[0-9]+$/",
+      "ignoreUnstable": true,
+      "branchTopic": "typescript-{{newVersion}}",
+      "commitMessageTopic": "TypeScript stable release",
+      "prBodyNotes": ["This PR is prepared by merging the exact upstream release tag and regenerating public packages. Merge with a merge commit to preserve upstream history."]
+    }
+  ]
+}
