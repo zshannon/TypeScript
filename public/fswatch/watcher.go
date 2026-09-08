@@ -11,7 +11,7 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/zshannon/TypeScript/public/nativepath"
+	"github.com/zshannon/TypeScript/public/v7/nativepath"
 )
 
 var errNilCallback = errors.New("fswatch: callback must not be nil")

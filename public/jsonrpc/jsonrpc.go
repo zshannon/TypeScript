@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 // JSONRPCVersion represents the JSON-RPC version field, always "2.0".

@@ -3,9 +3,9 @@ package estransforms
 import (
 	"slices"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/debug"
-	"github.com/zshannon/TypeScript/public/printer"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/debug"
+	"github.com/zshannon/TypeScript/public/v7/printer"
 )
 
 /**

@@ -3,7 +3,7 @@ package transpile
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/testutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
 )
 
 func TestTranspileFSRejectsDirectoryAccess(t *testing.T) {

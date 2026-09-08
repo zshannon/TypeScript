@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/collections"
+	"github.com/zshannon/TypeScript/public/v7/collections"
 )
 
 var (

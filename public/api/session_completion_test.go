@@ -3,10 +3,10 @@ package api
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/bundled"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/ls/lsutil"
-	"github.com/zshannon/TypeScript/public/testutil/projecttestutil"
+	"github.com/zshannon/TypeScript/public/v7/bundled"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/projecttestutil"
 	"gotest.tools/v3/assert"
 )
 

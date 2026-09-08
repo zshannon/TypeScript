@@ -7,11 +7,11 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/spanmap"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/spanmap"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 	"github.com/zeebo/xxh3"
 )
 

@@ -1,8 +1,8 @@
 package estransforms
 
 import (
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/transformers"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/transformers"
 )
 
 var (

@@ -12,17 +12,17 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 )
 
 const (
-	sourceModule = "github.com/microsoft/TypeScript/tsc"
-	publicModule = "github.com/zshannon/TypeScript/public"
+	publicModuleBase = "github.com/zshannon/TypeScript/public"
 )
 
 var errOutputOutOfDate = errors.New("generated public module is out of date")
 
-const publicReadme = `# TypeScript compiler packages for Go
+const publicReadmeTemplate = `# TypeScript compiler packages for Go
 
 This module is generated from every package under ` + "`tsc/internal`" + ` in the
 [TypeScript Go repository](https://github.com/zshannon/TypeScript). It publishes
@@ -33,8 +33,8 @@ For example:
 
 ` + "```go" + `
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/parser"
+	"%[1]s/ast"
+	"%[1]s/parser"
 )
 ` + "```" + `
 
@@ -44,9 +44,10 @@ packages such as ` + "`vfs/internal`" + ` can be imported by external modules.
 ## Compatibility
 
 This broad API follows upstream compiler implementation packages and may change at
-any time. Consumers should pin a commit using its Go pseudo-version instead of
-assuming semantic API stability. The module uses ordinary Go module resolution
-from repository commits and has no separate release process.
+any time. Go module versions align exactly with upstream TypeScript versions. For
+example, ` + "`github.com/zshannon/TypeScript/public/v7@v7.0.2`" + ` corresponds to TypeScript 7.0.2.
+
+%[2]s
 
 ## Regeneration
 
@@ -55,6 +56,7 @@ From the repository root:
 ` + "```sh" + `
 go run ./scripts/export-go.go
 go run ./scripts/export-go.go --check
+go run ./scripts/export-go.go --version
 ` + "```" + `
 
 The generator copies compiler packages and their required source assets. It does not
@@ -67,13 +69,15 @@ func main() {
 }
 
 func run(args []string, repoRoot string, stdout, stderr io.Writer) int {
-	check := false
+	mode := "generate"
 	switch {
 	case len(args) == 0:
 	case len(args) == 1 && args[0] == "--check":
-		check = true
+		mode = "check"
+	case len(args) == 1 && args[0] == "--version":
+		mode = "version"
 	default:
-		fmt.Fprintln(stderr, "usage: go run ./scripts/export-go.go [--check]")
+		fmt.Fprintln(stderr, "usage: go run ./scripts/export-go.go [--check|--version]")
 		return 2
 	}
 
@@ -82,11 +86,20 @@ func run(args []string, repoRoot string, stdout, stderr io.Writer) int {
 		fmt.Fprintln(stderr, err)
 		return 1
 	}
-	if err := exportModule(root, check); err != nil {
+	if mode == "version" {
+		version, err := readCompilerVersion(root)
+		if err != nil {
+			fmt.Fprintln(stderr, err)
+			return 1
+		}
+		fmt.Fprintln(stdout, "v"+version.source)
+		return 0
+	}
+	if err := exportModule(root, mode == "check"); err != nil {
 		fmt.Fprintln(stderr, err)
 		return 1
 	}
-	if check {
+	if mode == "check" {
 		fmt.Fprintln(stdout, "public module is up to date")
 	} else {
 		fmt.Fprintln(stdout, "generated public module")
@@ -118,7 +131,25 @@ type outputFile struct {
 	mode fs.FileMode
 }
 
+type compilerVersion struct {
+	source       string
+	major        int
+	publicModule string
+}
+
 func buildOutput(repoRoot string) (map[string]outputFile, error) {
+	version, err := readCompilerVersion(repoRoot)
+	if err != nil {
+		return nil, err
+	}
+	goMod, err := os.ReadFile(filepath.Join(repoRoot, "tsc", "go.mod"))
+	if err != nil {
+		return nil, fmt.Errorf("read tsc/go.mod: %w", err)
+	}
+	sourceModule, err := readModuleDirective(goMod)
+	if err != nil {
+		return nil, err
+	}
 	sourceRoot := filepath.Join(repoRoot, "tsc", "internal")
 	if info, err := os.Stat(sourceRoot); err != nil || !info.IsDir() {
 		if err == nil {
@@ -128,7 +159,7 @@ func buildOutput(repoRoot string) (map[string]outputFile, error) {
 	}
 
 	result := map[string]outputFile{}
-	err := filepath.WalkDir(sourceRoot, func(path string, entry fs.DirEntry, walkErr error) error {
+	err = filepath.WalkDir(sourceRoot, func(path string, entry fs.DirEntry, walkErr error) error {
 		if walkErr != nil {
 			return walkErr
 		}
@@ -155,7 +186,7 @@ func buildOutput(repoRoot string) (map[string]outputFile, error) {
 			return err
 		}
 		if strings.HasSuffix(strings.ToLower(entry.Name()), ".go") {
-			content, err = rewriteGoImports(path, content)
+			content, err = rewriteGoImports(path, content, sourceModule, version.publicModule)
 			if err != nil {
 				return err
 			}
@@ -167,11 +198,7 @@ func buildOutput(repoRoot string) (map[string]outputFile, error) {
 		return nil, fmt.Errorf("collect compiler packages: %w", err)
 	}
 
-	goMod, err := os.ReadFile(filepath.Join(repoRoot, "tsc", "go.mod"))
-	if err != nil {
-		return nil, fmt.Errorf("read tsc/go.mod: %w", err)
-	}
-	goMod, err = rewriteModuleDirective(goMod)
+	goMod, err = rewriteModuleDirective(goMod, version.publicModule)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +210,6 @@ func buildOutput(repoRoot string) (map[string]outputFile, error) {
 	}{
 		{source: filepath.Join(repoRoot, "tsc", "go.sum"), output: "go.sum"},
 		{source: filepath.Join(repoRoot, "tsc", "LICENSE"), output: "LICENSE"},
-		{source: filepath.Join(repoRoot, "NOTICE.txt"), output: "NOTICE"},
 	} {
 		content, err := os.ReadFile(file.source)
 		if err != nil {
@@ -191,8 +217,83 @@ func buildOutput(repoRoot string) (map[string]outputFile, error) {
 		}
 		result[file.output] = outputFile{data: content, mode: 0o644}
 	}
-	result["README.md"] = outputFile{data: []byte(publicReadme), mode: 0o644}
+	notice, err := readFirstExisting(
+		filepath.Join(repoRoot, "tsc", "NOTICE.txt"),
+		filepath.Join(repoRoot, "NOTICE.txt"),
+	)
+	if err != nil {
+		return nil, err
+	}
+	result["NOTICE"] = outputFile{data: notice, mode: 0o644}
+	result["README.md"] = outputFile{data: []byte(publicReadme(version)), mode: 0o644}
 	return result, nil
+}
+
+func readFirstExisting(paths ...string) ([]byte, error) {
+	for _, path := range paths {
+		content, err := os.ReadFile(path)
+		if err == nil {
+			return content, nil
+		}
+		if !errors.Is(err, fs.ErrNotExist) {
+			return nil, fmt.Errorf("read %s: %w", path, err)
+		}
+	}
+	return nil, fmt.Errorf("none of the required files exist: %s", strings.Join(paths, ", "))
+}
+
+func readCompilerVersion(repoRoot string) (compilerVersion, error) {
+	versionPath := filepath.Join(repoRoot, "tsc", "internal", "core", "version.go")
+	fileSet := token.NewFileSet()
+	parsed, err := parser.ParseFile(fileSet, versionPath, nil, 0)
+	if err != nil {
+		return compilerVersion{}, fmt.Errorf("read compiler version from %s: %w", versionPath, err)
+	}
+	var source string
+	for _, declaration := range parsed.Decls {
+		general, ok := declaration.(*ast.GenDecl)
+		if !ok || general.Tok != token.VAR {
+			continue
+		}
+		for _, spec := range general.Specs {
+			value, ok := spec.(*ast.ValueSpec)
+			if !ok || len(value.Names) != 1 || value.Names[0].Name != "version" || len(value.Values) != 1 {
+				continue
+			}
+			literal, ok := value.Values[0].(*ast.BasicLit)
+			if !ok || literal.Kind != token.STRING {
+				return compilerVersion{}, fmt.Errorf("compiler version in %s is not a string literal", versionPath)
+			}
+			source, err = strconv.Unquote(literal.Value)
+			if err != nil {
+				return compilerVersion{}, fmt.Errorf("parse compiler version in %s: %w", versionPath, err)
+			}
+		}
+	}
+	if source == "" {
+		return compilerVersion{}, fmt.Errorf("compiler version variable not found in %s", versionPath)
+	}
+	majorText, _, found := strings.Cut(source, ".")
+	if !found || strings.Count(source, ".") < 2 {
+		return compilerVersion{}, fmt.Errorf("compiler version %q does not contain major, minor, and patch components", source)
+	}
+	major, err := strconv.Atoi(majorText)
+	if err != nil || major < 0 {
+		return compilerVersion{}, fmt.Errorf("compiler version %q has an invalid major version", source)
+	}
+	modulePath := publicModuleBase
+	if major >= 2 {
+		modulePath += "/v" + majorText
+	}
+	return compilerVersion{source: source, major: major, publicModule: modulePath}, nil
+}
+
+func publicReadme(version compilerVersion) string {
+	current := fmt.Sprintf("The current generated source is `%s`, and its corresponding Go module version is `v%s`.", version.source, version.source)
+	if strings.HasSuffix(version.source, "-dev") {
+		current = fmt.Sprintf("The current generated source is `%s`, a development version; it is not the stable 7.0.2 release.", version.source)
+	}
+	return fmt.Sprintf(publicReadmeTemplate, version.publicModule, current)
 }
 
 func mapInternalSegments(path string) string {
@@ -205,7 +306,7 @@ func mapInternalSegments(path string) string {
 	return filepath.FromSlash(strings.Join(parts, "/"))
 }
 
-func rewriteGoImports(filename string, content []byte) ([]byte, error) {
+func rewriteGoImports(filename string, content []byte, sourceModule string, publicModule string) ([]byte, error) {
 	fileSet := token.NewFileSet()
 	parsed, err := parser.ParseFile(fileSet, filename, content, 0)
 	if err != nil {
@@ -222,7 +323,7 @@ func rewriteGoImports(filename string, content []byte) ([]byte, error) {
 		if !ok || literal.Kind != token.STRING {
 			return true
 		}
-		value := rewriteCompilerPathOccurrences(literal.Value)
+		value := rewriteCompilerPathOccurrences(literal.Value, sourceModule, publicModule)
 		if value == literal.Value {
 			return true
 		}
@@ -240,7 +341,7 @@ func rewriteGoImports(filename string, content []byte) ([]byte, error) {
 	return content, nil
 }
 
-func rewriteCompilerPathOccurrences(literal string) string {
+func rewriteCompilerPathOccurrences(literal string, sourceModule string, publicModule string) string {
 	oldPrefix := sourceModule + "/internal"
 	remaining := literal
 	var rewritten strings.Builder
@@ -267,6 +368,20 @@ func rewriteCompilerPathOccurrences(literal string) string {
 	}
 }
 
+func readModuleDirective(content []byte) (string, error) {
+	for _, line := range bytes.Split(content, []byte("\n")) {
+		fields := strings.Fields(string(line))
+		if len(fields) == 0 || fields[0] != "module" {
+			continue
+		}
+		if len(fields) != 2 {
+			return "", errors.New("tsc/go.mod has an invalid module directive")
+		}
+		return fields[1], nil
+	}
+	return "", errors.New("tsc/go.mod has no module directive")
+}
+
 func isImportPathByte(value byte) bool {
 	return value >= 'a' && value <= 'z' ||
 		value >= 'A' && value <= 'Z' ||
@@ -274,7 +389,7 @@ func isImportPathByte(value byte) bool {
 		strings.ContainsRune("/._~-+", rune(value))
 }
 
-func rewriteModuleDirective(content []byte) ([]byte, error) {
+func rewriteModuleDirective(content []byte, publicModule string) ([]byte, error) {
 	lines := bytes.SplitAfter(content, []byte("\n"))
 	for index, line := range lines {
 		trimmed := strings.TrimSpace(string(line))

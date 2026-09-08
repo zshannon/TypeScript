@@ -1,11 +1,11 @@
 package tstransforms
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/debug"
-	"github.com/zshannon/TypeScript/public/printer"
-	"github.com/zshannon/TypeScript/public/transformers"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/debug"
+	"github.com/zshannon/TypeScript/public/v7/printer"
+	"github.com/zshannon/TypeScript/public/v7/transformers"
 )
 
 type metadataSerializer struct {

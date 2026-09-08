@@ -1,8 +1,8 @@
 package transformers
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/printer"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/printer"
 )
 
 type Transformer struct {

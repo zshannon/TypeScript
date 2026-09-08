@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/fourslash"
-	"github.com/zshannon/TypeScript/public/testutil"
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
 )
 
 // A single file that imports the same *unresolvable* module many times used to force

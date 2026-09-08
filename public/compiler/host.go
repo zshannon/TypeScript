@@ -1,15 +1,15 @@
 package compiler
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/parser"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs"
-	"github.com/zshannon/TypeScript/public/vfs/cachedvfs"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/parser"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs/cachedvfs"
 )
 
 type CompilerHost interface {

@@ -1,0 +1,146 @@
+name: Release public Go module
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-go-module-release
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  validate:
+    name: Validate selected compiler ref
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    outputs:
+      public_tag: ${{ steps.version.outputs.public_tag }}
+      source_version: ${{ steps.version.outputs.source_version }}
+      tested_sha: ${{ steps.version.outputs.tested_sha }}
+    steps:
+      - name: Check out the selected ref
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Go from the compiler module
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: tsc/go.mod
+          cache-dependency-path: |
+            tsc/go.sum
+            public/go.sum
+
+      - name: Derive stable TypeScript and public module versions
+        id: version
+        run: |
+          set -euo pipefail
+          source_version=$(go run ./scripts/export-go.go --version)
+          if [[ ! "$source_version" =~ ^v([1-9][0-9]*)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "Refuses to publish non-stable TypeScript version: $source_version" >&2
+            exit 1
+          fi
+          public_major=${BASH_REMATCH[1]}
+          public_module="github.com/zshannon/TypeScript/public/v${public_major}"
+          generated_module=$(awk '$1 == "module" { print $2; exit }' public/go.mod)
+          if [[ "$generated_module" != "$public_module" ]]; then
+            echo "Generated module path $generated_module does not match TypeScript major $public_major." >&2
+            exit 1
+          fi
+          echo "source_version=$source_version" >>"$GITHUB_OUTPUT"
+          echo "public_tag=public/$source_version" >>"$GITHUB_OUTPUT"
+          echo "tested_sha=$(git rev-parse HEAD)" >>"$GITHUB_OUTPUT"
+
+      - name: Require the matching official Microsoft tag in ancestry
+        env:
+          SOURCE_VERSION: ${{ steps.version.outputs.source_version }}
+        run: |
+          set -euo pipefail
+          git remote add microsoft-upstream https://github.com/microsoft/TypeScript.git
+          git fetch --no-tags microsoft-upstream \
+            "+refs/tags/${SOURCE_VERSION}:refs/remotes/microsoft-upstream/tags/${SOURCE_VERSION}"
+          upstream_tag="refs/remotes/microsoft-upstream/tags/${SOURCE_VERSION}^{commit}"
+          if ! git merge-base --is-ancestor "$upstream_tag" HEAD; then
+            echo "Official Microsoft tag $SOURCE_VERSION is not an ancestor of the selected fork ref." >&2
+            exit 1
+          fi
+          upstream_commit=$(git rev-parse "$upstream_tag")
+          upstream_version=$(git show "${upstream_commit}:tsc/internal/core/version.go" \
+            | sed -n 's/^var version = "\([^"]*\)"$/\1/p')
+          if [[ "v$upstream_version" != "$SOURCE_VERSION" ]]; then
+            echo "Official tag $SOURCE_VERSION contains compiler version $upstream_version." >&2
+            exit 1
+          fi
+
+      - name: Refuse an existing public tag
+        env:
+          PUBLIC_TAG: ${{ steps.version.outputs.public_tag }}
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --tags origin "refs/tags/$PUBLIC_TAG" >/dev/null 2>&1; then
+            echo "Public module tag already exists: $PUBLIC_TAG" >&2
+            exit 1
+          fi
+
+      - name: Test generator and committed output
+        run: |
+          go test ./scripts/export-go.go ./scripts/export-go_test.go
+          go run ./scripts/export-go.go --check
+
+      - name: Test compiler regressions
+        run: GOWORK=off go -C tsc test ./internal/compiler ./internal/tracing ./internal/project ./internal/lsp/lspwatcher
+
+      - name: Test external public-module consumer
+        run: scripts/test-public-module.sh
+
+  publish:
+    name: Tag exact validated fork commit
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    env:
+      PUBLIC_TAG: ${{ needs.validate.outputs.public_tag }}
+      SOURCE_VERSION: ${{ needs.validate.outputs.source_version }}
+      TESTED_SHA: ${{ needs.validate.outputs.tested_sha }}
+    steps:
+      - name: Check out exact validated commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.validate.outputs.tested_sha }}
+          fetch-depth: 0
+
+      - name: Publish matching public module tag
+        run: |
+          set -euo pipefail
+          if [[ ! "$SOURCE_VERSION" =~ ^v([1-9][0-9]*)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "Invalid validated TypeScript version: $SOURCE_VERSION" >&2
+            exit 1
+          fi
+          if [[ "$PUBLIC_TAG" != "public/$SOURCE_VERSION" ]]; then
+            echo "Public tag does not match the validated TypeScript version." >&2
+            exit 1
+          fi
+          if [[ ! "$TESTED_SHA" =~ ^[0-9a-f]{40}$ || $(git rev-parse HEAD) != "$TESTED_SHA" ]]; then
+            echo "Publish checkout does not match the validated commit." >&2
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/$PUBLIC_TAG" >/dev/null 2>&1; then
+            echo "Public module tag already exists: $PUBLIC_TAG" >&2
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag --annotate "$PUBLIC_TAG" "$TESTED_SHA" --message "TypeScript $SOURCE_VERSION public Go module"
+          git push origin "refs/tags/$PUBLIC_TAG"

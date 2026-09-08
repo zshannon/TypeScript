@@ -4,8 +4,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/fswatch"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/fswatch"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 // WatchBackend abstracts fswatch.Watcher for testing

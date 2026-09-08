@@ -3,10 +3,10 @@ package project
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 	"gotest.tools/v3/assert"
 )
 

@@ -3,9 +3,9 @@ package evaluator
 import (
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/jsnum"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/jsnum"
 )
 
 type Result struct {

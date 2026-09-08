@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/locale"
-	"github.com/zshannon/TypeScript/public/spanmap"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/locale"
+	"github.com/zshannon/TypeScript/public/v7/spanmap"
 )
 
 // TransformErrorKind identifies the stage at which a content mapper transform failed.

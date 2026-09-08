@@ -1,8 +1,8 @@
 package project
 
 import (
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
 )
 
 const excessiveChangeThreshold = 1000

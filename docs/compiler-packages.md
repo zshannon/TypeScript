@@ -3,7 +3,7 @@ generated-by: GPT-6 Astra Ultra
 ---
 # Compiler packages
 
-The module is `github.com/zshannon/TypeScript/public`. Package paths include `/compiler`, `/checker`, `/ast`, `/parser`, `/vfs`, and all other packages under upstream `tsc/internal`.
+The module is `github.com/zshannon/TypeScript/public/v7`. Package paths include `/compiler`, `/checker`, `/ast`, `/parser`, `/vfs`, and all other packages under upstream `tsc/internal`.
 
 Generation copies whole package implementations and rewrites references between them. Standard Go visibility still applies to declarations inside a package. Nested directories named `internal` become `internals` in the generated tree, so even those packages can be imported outside the compiler module. For example, upstream `tsc/internal/vfs/internal` becomes `public/vfs/internals`.
 
@@ -11,9 +11,17 @@ The source tree remains under Microsoft's original module path and directory lay
 
 ## Consume from another repository
 
-Use Go 1.26 or newer. Select the exact commit reviewed in the compiler update PR, then run `go get github.com/zshannon/TypeScript/public@<commit>`. Go records the selected commit as a standard pseudo-version in `go.mod`; no separate tag or release process is needed.
+Use Go 1.26 or newer. The Go package version matches the upstream TypeScript version. For the TypeScript 7.0.2 release, consumption is:
 
-Import packages directly, for example `github.com/zshannon/TypeScript/public/compiler`. No Microsoft module replacement or matching internal import prefix is needed. The executable example under `scripts/testdata/public-consumer` parses and typechecks TypeScript with embedded standard libraries, including a deliberate type error assertion.
+```sh
+go get github.com/zshannon/TypeScript/public/v7@v7.0.2
+```
+
+This command requires the corresponding fork release to have been published. The module path ends in `/v7` because Go requires the major version in paths for version 2 and later. The Git tag is `public/v7.0.2`, Go's standard tag for a module located in `public/`; the package version is `v7.0.2`. There is no independent fork version counter.
+
+The version comes from `tsc/internal/core/version.go`. Current upstream main is `7.1.0-dev`; it cannot be published as `7.0.2`. Stable releases use the corresponding upstream release source with the fork's reviewed changes. Development commits can still be selected by commit when needed.
+
+Import packages directly, for example `github.com/zshannon/TypeScript/public/v7/compiler`. No Microsoft module replacement or matching internal import prefix is needed. The executable example under `scripts/testdata/public-consumer` parses and typechecks TypeScript with embedded standard libraries, including a deliberate type error assertion.
 
 Pin dependency versions because these are upstream compiler packages, not a separately stabilized wrapper API. Go downloads the module source directly from the public Git repository or its module proxy; there is no separate package upload service.
 

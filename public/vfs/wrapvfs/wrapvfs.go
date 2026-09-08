@@ -3,7 +3,7 @@ package wrapvfs
 import (
 	"time"
 
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 type Replacements struct {

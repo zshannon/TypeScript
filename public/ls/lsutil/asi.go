@@ -1,9 +1,9 @@
 package lsutil
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/astnav"
-	"github.com/zshannon/TypeScript/public/scanner"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/astnav"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
 )
 
 func PositionIsASICandidate(pos int, context *ast.Node, file *ast.SourceFile) bool {

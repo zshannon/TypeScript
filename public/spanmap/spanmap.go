@@ -14,8 +14,8 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 // Kind describes how positions inside a segment relate the virtual span to the original span.

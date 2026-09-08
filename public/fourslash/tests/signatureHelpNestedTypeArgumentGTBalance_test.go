@@ -3,8 +3,8 @@ package fourslash_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/fourslash"
-	"github.com/zshannon/TypeScript/public/testutil"
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
 )
 
 // Regression for getPossibleTypeArgumentsInfo (see PR #3222): when scanning backward through

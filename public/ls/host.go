@@ -1,10 +1,10 @@
 package ls
 
 import (
-	"github.com/zshannon/TypeScript/public/ls/autoimport"
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/ls/lsutil"
-	"github.com/zshannon/TypeScript/public/sourcemap"
+	"github.com/zshannon/TypeScript/public/v7/ls/autoimport"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsutil"
+	"github.com/zshannon/TypeScript/public/v7/sourcemap"
 )
 
 type Host interface {

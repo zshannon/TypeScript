@@ -5,7 +5,7 @@ package encoder
 import (
 	"fmt"
 
-	"github.com/zshannon/TypeScript/public/ast"
+	"github.com/zshannon/TypeScript/public/v7/ast"
 )
 
 func (d *astDecoder) createStringNode(kind ast.Kind, data uint32, commonData uint8) (*ast.Node, error) {

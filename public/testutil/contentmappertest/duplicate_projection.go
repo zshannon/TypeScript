@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 // duplicateProjectionHandler emits the original content as both the canonical output and a supplemental

@@ -10,15 +10,15 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/debug"
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/spanmap"
-	"github.com/zshannon/TypeScript/public/stringutil"
-	"github.com/zshannon/TypeScript/public/testutil/baseline"
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/debug"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/spanmap"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/baseline"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 const (

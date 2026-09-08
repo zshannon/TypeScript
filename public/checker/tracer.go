@@ -3,8 +3,8 @@ package checker
 import (
 	"maps"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/tracing"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/tracing"
 )
 
 // Tracer records types and trace events during type checking. A nil *Tracer

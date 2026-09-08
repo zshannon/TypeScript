@@ -7,9 +7,9 @@ import (
 	"slices"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/spanmap"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/spanmap"
 	"github.com/zeebo/xxh3"
 )
 

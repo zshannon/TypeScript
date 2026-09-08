@@ -3,8 +3,8 @@ package printer
 import (
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 // PrintAndPositionNode prints a synthesized node to text using the standard

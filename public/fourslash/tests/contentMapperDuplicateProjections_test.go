@@ -3,8 +3,8 @@ package fourslash_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/testutil"
-	"github.com/zshannon/TypeScript/public/testutil/contentmappertest"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/contentmappertest"
 )
 
 // A mapper may emit the same original text in more than one virtual output. Each output is a separate

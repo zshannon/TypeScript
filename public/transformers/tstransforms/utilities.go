@@ -1,9 +1,9 @@
 package tstransforms
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/jsnum"
-	"github.com/zshannon/TypeScript/public/printer"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/jsnum"
+	"github.com/zshannon/TypeScript/public/v7/printer"
 )
 
 func constantExpression(value any, factory *printer.NodeFactory) *ast.Expression {

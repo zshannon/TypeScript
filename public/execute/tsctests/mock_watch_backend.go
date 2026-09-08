@@ -8,10 +8,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/execute/watchmanager"
-	"github.com/zshannon/TypeScript/public/fswatch"
-	"github.com/zshannon/TypeScript/public/testutil/fsbaselineutil"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/execute/watchmanager"
+	"github.com/zshannon/TypeScript/public/v7/fswatch"
+	"github.com/zshannon/TypeScript/public/v7/testutil/fsbaselineutil"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 // MockWatchBackend implements watchmanager.WatchBackend for testing. It

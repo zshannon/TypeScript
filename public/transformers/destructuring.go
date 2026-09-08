@@ -4,8 +4,8 @@ import (
 	"slices"
 	"strconv"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 // FlattenLevel controls how deeply binding/assignment patterns are decomposed.

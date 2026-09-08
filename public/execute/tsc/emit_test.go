@@ -9,13 +9,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/execute/incremental"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/execute/incremental"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 	"gotest.tools/v3/assert"
 )
 

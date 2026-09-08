@@ -1,7 +1,7 @@
 package ipc
 
 import (
-	"github.com/zshannon/TypeScript/public/jsonrpc"
+	"github.com/zshannon/TypeScript/public/v7/jsonrpc"
 )
 
 // Message is an alias for jsonrpc.Message for convenience.

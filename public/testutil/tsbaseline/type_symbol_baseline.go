@@ -8,17 +8,17 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/checker"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/nodebuilder"
-	"github.com/zshannon/TypeScript/public/printer"
-	"github.com/zshannon/TypeScript/public/scanner"
-	"github.com/zshannon/TypeScript/public/testutil"
-	"github.com/zshannon/TypeScript/public/testutil/baseline"
-	"github.com/zshannon/TypeScript/public/testutil/harnessutil"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/checker"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/nodebuilder"
+	"github.com/zshannon/TypeScript/public/v7/printer"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/baseline"
+	"github.com/zshannon/TypeScript/public/v7/testutil/harnessutil"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 var (

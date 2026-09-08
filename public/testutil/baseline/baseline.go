@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/repo"
-	"github.com/zshannon/TypeScript/public/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/repo"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
 	"github.com/peter-evans/patience"
 )
 

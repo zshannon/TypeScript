@@ -8,14 +8,14 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/module"
-	"github.com/zshannon/TypeScript/public/project/logging"
-	"github.com/zshannon/TypeScript/public/semver"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/module"
+	"github.com/zshannon/TypeScript/public/v7/project/logging"
+	"github.com/zshannon/TypeScript/public/v7/semver"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 type TypingsInfo struct {

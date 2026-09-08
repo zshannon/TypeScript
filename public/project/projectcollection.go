@@ -6,10 +6,10 @@ import (
 	"slices"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/ls"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/ls"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 type ProjectCollection struct {

@@ -3,7 +3,7 @@ package build
 import (
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/collections"
+	"github.com/zshannon/TypeScript/public/v7/collections"
 )
 
 type parseCacheEntry[V comparable] struct {

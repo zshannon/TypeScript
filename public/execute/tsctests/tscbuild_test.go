@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/testutil/contentmappertest"
-	"github.com/zshannon/TypeScript/public/testutil/harnessutil"
-	"github.com/zshannon/TypeScript/public/testutil/stringtestutil"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/testutil/contentmappertest"
+	"github.com/zshannon/TypeScript/public/v7/testutil/harnessutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/stringtestutil"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 	"gotest.tools/v3/assert"
 )
 

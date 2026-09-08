@@ -3,7 +3,7 @@ package encoder
 import (
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
+	"github.com/zshannon/TypeScript/public/v7/ast"
 )
 
 type stringTable struct {

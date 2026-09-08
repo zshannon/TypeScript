@@ -3,12 +3,12 @@ package ast_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/parser"
-	"github.com/zshannon/TypeScript/public/testutil/fixtures"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs/osvfs"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/parser"
+	"github.com/zshannon/TypeScript/public/v7/testutil/fixtures"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs/osvfs"
 )
 
 func BenchmarkGetCombinedFlags(b *testing.B) {

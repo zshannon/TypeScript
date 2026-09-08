@@ -7,15 +7,15 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/execute/incremental"
-	"github.com/zshannon/TypeScript/public/locale"
-	"github.com/zshannon/TypeScript/public/tracing"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/execute/incremental"
+	"github.com/zshannon/TypeScript/public/v7/locale"
+	"github.com/zshannon/TypeScript/public/v7/tracing"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 func GetTraceWithWriterFromSys(w io.Writer, locale locale.Locale, testing CommandLineTesting) func(msg *diagnostics.Message, args ...any) {

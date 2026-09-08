@@ -3,7 +3,7 @@ package tsoptions
 import (
 	"slices"
 
-	"github.com/zshannon/TypeScript/public/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
 )
 
 var TscBuildOption = CommandLineOption{

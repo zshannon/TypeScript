@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/fourslash"
-	"github.com/zshannon/TypeScript/public/testutil"
-	"github.com/zshannon/TypeScript/public/testutil/stringtestutil"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/stringtestutil"
 )
 
 func TestFindAllRefsSolutionReferencingDefaultProjectDirectly(t *testing.T) {

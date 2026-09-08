@@ -3,14 +3,14 @@ package tsctests
 import (
 	"fmt"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/execute/incremental"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/testutil/fsbaselineutil"
-	"github.com/zshannon/TypeScript/public/testutil/harnessutil"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/execute/incremental"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/testutil/fsbaselineutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/harnessutil"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 type testFs struct {

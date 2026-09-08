@@ -6,11 +6,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/bundled"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/bundled"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 )
 
 // generateLongLineTS generates TypeScript source code that produces a single very long line.

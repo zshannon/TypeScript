@@ -3,10 +3,10 @@ package format_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/format"
-	"github.com/zshannon/TypeScript/public/parser"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/format"
+	"github.com/zshannon/TypeScript/public/v7/parser"
 	"gotest.tools/v3/assert"
 )
 

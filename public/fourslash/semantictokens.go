@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
 )
 
 type SemanticToken struct {

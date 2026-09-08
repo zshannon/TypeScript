@@ -4,7 +4,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/zshannon/TypeScript/public/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
 )
 
 // Tries to find the sourceMappingURL comment at the end of a file.

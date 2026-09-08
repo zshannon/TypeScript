@@ -4,10 +4,10 @@ import (
 	"slices"
 	"strconv"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/parser"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/parser"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 // SourceFiles is the canonical output and its unnamed supplemental compiler inputs.

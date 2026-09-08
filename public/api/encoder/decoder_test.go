@@ -5,11 +5,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/api/encoder"
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/parser"
-	"github.com/zshannon/TypeScript/public/repo"
+	"github.com/zshannon/TypeScript/public/v7/api/encoder"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/parser"
+	"github.com/zshannon/TypeScript/public/v7/repo"
 	"gotest.tools/v3/assert"
 )
 

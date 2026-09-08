@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/execute/incremental"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/execute/incremental"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 type readableBuildInfo struct {

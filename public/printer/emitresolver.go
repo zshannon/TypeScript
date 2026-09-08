@@ -1,10 +1,10 @@
 package printer
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/binder"
-	"github.com/zshannon/TypeScript/public/evaluator"
-	"github.com/zshannon/TypeScript/public/nodebuilder"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/binder"
+	"github.com/zshannon/TypeScript/public/v7/evaluator"
+	"github.com/zshannon/TypeScript/public/v7/nodebuilder"
 )
 
 type SymbolAccessibility int32

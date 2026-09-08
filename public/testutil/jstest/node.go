@@ -8,9 +8,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/repo"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/repo"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 const loaderScript = `import script from "./script.mjs";

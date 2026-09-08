@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/module"
-	"github.com/zshannon/TypeScript/public/scanner"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/module"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 type fileIncludeKind int

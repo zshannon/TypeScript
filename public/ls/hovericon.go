@@ -1,8 +1,8 @@
 package ls
 
 import (
-	"github.com/zshannon/TypeScript/public/ls/lsutil"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsutil"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
 )
 
 // vsImageCatalogGuid is the GUID of the shared VS image catalog (see

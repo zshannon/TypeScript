@@ -10,12 +10,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/bundled"
-	"github.com/zshannon/TypeScript/public/fswatch"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/project/logging"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs/osvfs"
+	"github.com/zshannon/TypeScript/public/v7/bundled"
+	"github.com/zshannon/TypeScript/public/v7/fswatch"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/project/logging"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs/osvfs"
 )
 
 func waitFor(t *testing.T, cond func() bool, msg string) {

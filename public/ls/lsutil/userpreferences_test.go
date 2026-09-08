@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/modulespecifiers"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/modulespecifiers"
 	"gotest.tools/v3/assert"
 )
 

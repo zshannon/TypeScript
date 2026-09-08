@@ -4,12 +4,12 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/astnav"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/scanner"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/astnav"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 func ProbablyUsesSemicolons(file *ast.SourceFile) bool {

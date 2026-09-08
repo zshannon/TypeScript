@@ -3,16 +3,16 @@ package compiler
 import (
 	"context"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/module"
-	"github.com/zshannon/TypeScript/public/outputpaths"
-	"github.com/zshannon/TypeScript/public/packagejson"
-	"github.com/zshannon/TypeScript/public/printer"
-	"github.com/zshannon/TypeScript/public/symlinks"
-	"github.com/zshannon/TypeScript/public/transformers/declarations"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/module"
+	"github.com/zshannon/TypeScript/public/v7/outputpaths"
+	"github.com/zshannon/TypeScript/public/v7/packagejson"
+	"github.com/zshannon/TypeScript/public/v7/printer"
+	"github.com/zshannon/TypeScript/public/v7/symlinks"
+	"github.com/zshannon/TypeScript/public/v7/transformers/declarations"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 // NOTE: EmitHost operations must be thread-safe

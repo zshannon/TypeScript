@@ -3,10 +3,10 @@ package checker
 import (
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/nodebuilder"
-	"github.com/zshannon/TypeScript/public/printer"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/nodebuilder"
+	"github.com/zshannon/TypeScript/public/v7/printer"
 )
 
 // TODO: Memoize once per checker to retain threadsafety

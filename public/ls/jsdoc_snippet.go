@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/astnav"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/format"
-	"github.com/zshannon/TypeScript/public/locale"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/parser"
-	"github.com/zshannon/TypeScript/public/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/astnav"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/format"
+	"github.com/zshannon/TypeScript/public/v7/locale"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/parser"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
 )
 
 type docCommentTemplate struct {

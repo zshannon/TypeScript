@@ -5,9 +5,9 @@ import (
 	"testing"
 	"testing/fstest"
 
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/tracing"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/tracing"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 	"gotest.tools/v3/assert"
 )
 

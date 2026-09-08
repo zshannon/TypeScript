@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 type LSPLineStarts []core.TextPos

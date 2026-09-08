@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 // VS Code's telemetry pipeline redacts any string matching

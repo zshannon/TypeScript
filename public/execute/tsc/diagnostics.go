@@ -5,11 +5,11 @@ import (
 	"io"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnosticwriter"
-	"github.com/zshannon/TypeScript/public/locale"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnosticwriter"
+	"github.com/zshannon/TypeScript/public/v7/locale"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 func getFormatOptsOfSys(sys System, locale locale.Locale) *diagnosticwriter.FormattingOptions {

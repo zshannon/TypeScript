@@ -1,8 +1,8 @@
 package checker
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 // nodeLinkStore is a links store keyed by node references. Values are stored directly

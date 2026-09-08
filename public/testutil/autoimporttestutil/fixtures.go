@@ -7,12 +7,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/project"
-	"github.com/zshannon/TypeScript/public/testutil/projecttestutil"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/project"
+	"github.com/zshannon/TypeScript/public/v7/testutil/projecttestutil"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 )
 
 // FileHandle represents a file created for an autoimport lifecycle test.

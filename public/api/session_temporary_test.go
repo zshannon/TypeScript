@@ -5,9 +5,9 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/bundled"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/testutil/projecttestutil"
+	"github.com/zshannon/TypeScript/public/v7/bundled"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/testutil/projecttestutil"
 	"gotest.tools/v3/assert"
 )
 

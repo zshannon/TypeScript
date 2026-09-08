@@ -3,9 +3,9 @@ package fourslash_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/fourslash"
-	fourslashUtil "github.com/zshannon/TypeScript/public/fourslash/tests/util"
-	"github.com/zshannon/TypeScript/public/testutil"
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	fourslashUtil "github.com/zshannon/TypeScript/public/v7/fourslash/tests/util"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
 )
 
 func TestCompletionsOnImportIdentifierWithFromOnNextLine(t *testing.T) {

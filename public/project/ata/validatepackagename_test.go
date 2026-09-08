@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/project/ata"
+	"github.com/zshannon/TypeScript/public/v7/project/ata"
 	"gotest.tools/v3/assert"
 )
 

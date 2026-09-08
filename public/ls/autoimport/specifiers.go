@@ -3,7 +3,7 @@ package autoimport
 import (
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/modulespecifiers"
+	"github.com/zshannon/TypeScript/public/v7/modulespecifiers"
 )
 
 func (v *View) GetModuleSpecifier(

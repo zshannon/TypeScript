@@ -3,8 +3,8 @@ package fourslash_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/fourslash"
-	"github.com/zshannon/TypeScript/public/testutil"
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
 )
 
 func TestCodeFixMissingTypeAnnotationOnExports51_slightly_more_complex_generics_with_default(t *testing.T) {

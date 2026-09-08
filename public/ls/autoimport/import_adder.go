@@ -6,19 +6,19 @@ import (
 	"maps"
 	"slices"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/checker"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/debug"
-	"github.com/zshannon/TypeScript/public/locale"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/checker"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/debug"
+	"github.com/zshannon/TypeScript/public/v7/locale"
 
 	// "github.com/microsoft/TypeScript/tsc/internal/ls"
-	"github.com/zshannon/TypeScript/public/ls/change"
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/ls/lsutil"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/nodebuilder"
+	"github.com/zshannon/TypeScript/public/v7/ls/change"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsutil"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/nodebuilder"
 )
 
 type ImportAdder interface {

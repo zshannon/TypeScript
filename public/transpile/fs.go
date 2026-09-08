@@ -3,7 +3,7 @@ package transpile
 import (
 	"fmt"
 
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 // transpileFS embeds unsupported operations so unexpected filesystem access

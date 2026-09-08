@@ -4,7 +4,7 @@ import (
 	"errors"
 	"iter"
 
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 type Mapping struct {

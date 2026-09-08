@@ -5,10 +5,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/scanner"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
 )
 
 func createDiagnosticForInvalidEnumType(opt *CommandLineOption, sourceFile *ast.SourceFile, node *ast.Node) *ast.Diagnostic {

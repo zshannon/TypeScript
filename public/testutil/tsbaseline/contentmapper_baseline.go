@@ -6,11 +6,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/diagnosticwriter"
-	"github.com/zshannon/TypeScript/public/testutil/baseline"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/diagnosticwriter"
+	"github.com/zshannon/TypeScript/public/v7/testutil/baseline"
 )
 
 var ansiEscape = regexp.MustCompile("\x1b\\[[0-9;]*m")

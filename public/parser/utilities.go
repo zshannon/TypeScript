@@ -3,9 +3,9 @@ package parser
 import (
 	"slices"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/scanner"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
 )
 
 func getLanguageVariant(scriptKind core.ScriptKind) core.LanguageVariant {

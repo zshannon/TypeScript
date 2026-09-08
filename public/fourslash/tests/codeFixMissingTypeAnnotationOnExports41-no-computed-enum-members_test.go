@@ -3,8 +3,8 @@ package fourslash_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/fourslash"
-	"github.com/zshannon/TypeScript/public/testutil"
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
 )
 
 func TestCodeFixMissingTypeAnnotationOnExports41_no_computed_enum_members(t *testing.T) {

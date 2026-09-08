@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/zshannon/TypeScript/public/ipc"
+	"github.com/zshannon/TypeScript/public/v7/ipc"
 )
 
 const (

@@ -4,16 +4,16 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/binder"
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/debug"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/jsnum"
-	"github.com/zshannon/TypeScript/public/scanner"
-	"github.com/zshannon/TypeScript/public/stringutil"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/binder"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/debug"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/jsnum"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 func (c *Checker) grammarErrorOnFirstToken(node *ast.Node, message *diagnostics.Message, args ...any) bool {

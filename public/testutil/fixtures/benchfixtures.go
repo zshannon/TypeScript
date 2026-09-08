@@ -3,8 +3,8 @@ package fixtures
 import (
 	"path/filepath"
 
-	"github.com/zshannon/TypeScript/public/repo"
-	"github.com/zshannon/TypeScript/public/testutil/filefixture"
+	"github.com/zshannon/TypeScript/public/v7/repo"
+	"github.com/zshannon/TypeScript/public/v7/testutil/filefixture"
 )
 
 var BenchFixtures = []filefixture.Fixture{

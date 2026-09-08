@@ -5,8 +5,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/json"
 	"gotest.tools/v3/assert"
 )
 

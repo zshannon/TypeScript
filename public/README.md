@@ -9,8 +9,8 @@ For example:
 
 ```go
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/parser"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/parser"
 )
 ```
 
@@ -20,9 +20,10 @@ packages such as `vfs/internal` can be imported by external modules.
 ## Compatibility
 
 This broad API follows upstream compiler implementation packages and may change at
-any time. Consumers should pin a commit using its Go pseudo-version instead of
-assuming semantic API stability. The module uses ordinary Go module resolution
-from repository commits and has no separate release process.
+any time. Go module versions align exactly with upstream TypeScript versions. For
+example, `github.com/zshannon/TypeScript/public/v7@v7.0.2` corresponds to TypeScript 7.0.2.
+
+The current generated source is `7.1.0-dev`, a development version; it is not the stable 7.0.2 release.
 
 ## Regeneration
 
@@ -31,6 +32,7 @@ From the repository root:
 ```sh
 go run ./scripts/export-go.go
 go run ./scripts/export-go.go --check
+go run ./scripts/export-go.go --version
 ```
 
 The generator copies compiler packages and their required source assets. It does not

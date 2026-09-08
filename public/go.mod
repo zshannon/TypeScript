@@ -1,4 +1,4 @@
-module github.com/zshannon/TypeScript/public
+module github.com/zshannon/TypeScript/public/v7
 
 go 1.26
 

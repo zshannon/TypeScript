@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/testutil/baseline"
+	"github.com/zshannon/TypeScript/public/v7/testutil/baseline"
 )
 
 // This test uses non-trimmed paths to emulate debug builds.
@@ -16,29 +16,29 @@ func TestSanitizedDebugStackTraceCompletionsRequest(t *testing.T) {
 	input := `goroutine 1196 [running]:
 runtime/debug.Stack()
         /usr/local/go/src/runtime/debug/stack.go:26 +0x8e
-github.com/zshannon/TypeScript/public/lsp.(*Server).recover(0xc0001dae08, {0x14bc418, 0xc00bc60960}, 0xc00baf16e0)
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).recover(0xc0001dae08, {0x14bc418, 0xc00bc60960}, 0xc00baf16e0)
         /workspaces/TypeScript/tsc/internal/lsp/server.go:777 +0x65
 panic({0x1077b40?, 0x1abcb70?})
         /usr/local/go/src/runtime/panic.go:783 +0x136
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionData.func15()
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionData.func15()
         /workspaces/TypeScript/tsc/internal/ls/completions.go:1303 +0xfa
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionData.func18()
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionData.func18()
         /workspaces/TypeScript/tsc/internal/ls/completions.go:1548 +0x2df
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionData(0xc004b08240, {0x14bc418, 0xc00bc60a20}, 0xc0069ef908, 0xc000272008, 0x1b, 0xc002b28e00)
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionData(0xc004b08240, {0x14bc418, 0xc00bc60a20}, 0xc0069ef908, 0xc000272008, 0x1b, 0xc002b28e00)
         /workspaces/TypeScript/tsc/internal/ls/completions.go:1581 +0x2b92
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionsAtPosition(0xc004b08240, {0x14bc418, 0xc00bc60a20}, 0xc000272008, 0x1b, 0x0)
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionsAtPosition(0xc004b08240, {0x14bc418, 0xc00bc60a20}, 0xc000272008, 0x1b, 0x0)
         /workspaces/TypeScript/tsc/internal/ls/completions.go:347 +0x690
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).ProvideCompletion(0xc004b08240, {0x14bc418, 0xc00bc60a20}, {0xc0092e02a0, 0x28}, {0x2, 0x4}, 0xc004580c30)
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).ProvideCompletion(0xc004b08240, {0x14bc418, 0xc00bc60a20}, {0xc0092e02a0, 0x28}, {0x2, 0x4}, 0xc004580c30)
         /workspaces/TypeScript/tsc/internal/ls/completions.go:47 +0x207
-github.com/zshannon/TypeScript/public/lsp.(*Server).handleCompletion(0xc0001dae08, {0x14bc418, 0xc00bc60960}, 0xc004b08240, 0xc00baf14d0)
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).handleCompletion(0xc0001dae08, {0x14bc418, 0xc00bc60960}, 0xc004b08240, 0xc00baf14d0)
         /workspaces/TypeScript/tsc/internal/lsp/server.go:1102 +0xe5
-github.com/zshannon/TypeScript/public/lsp.registerLanguageServiceWithAutoImportsRequestHandler[...].func1({0x14bc418, 0xc00bc60960}, 0xc00baf16e0)
+github.com/zshannon/TypeScript/public/v7/lsp.registerLanguageServiceWithAutoImportsRequestHandler[...].func1({0x14bc418, 0xc00bc60960}, 0xc00baf16e0)
         /workspaces/TypeScript/tsc/internal/lsp/server.go:682 +0x32a
-github.com/zshannon/TypeScript/public/lsp.(*Server).handleRequestOrNotification(0xc0001dae08, {0x14bc418, 0xc00bc60960}, 0xc00baf16e0)
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).handleRequestOrNotification(0xc0001dae08, {0x14bc418, 0xc00bc60960}, 0xc00baf16e0)
         /workspaces/TypeScript/tsc/internal/lsp/server.go:531 +0x11e
-github.com/zshannon/TypeScript/public/lsp.(*Server).dispatchLoop.func1()
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).dispatchLoop.func1()
         /workspaces/TypeScript/tsc/internal/lsp/server.go:414 +0x65
-created by github.com/zshannon/TypeScript/public/lsp.(*Server).dispatchLoop in goroutine 19
+created by github.com/zshannon/TypeScript/public/v7/lsp.(*Server).dispatchLoop in goroutine 19
         /workspaces/TypeScript/tsc/internal/lsp/server.go:438 +0x60`
 
 	baseline.Run(t, "completionsDebugStackTrace.md", sanitizedStackTraceBaselineContents(t, input, sanitizeStackTrace(input)), baseline.Options{
@@ -55,30 +55,30 @@ runtime/debug.Stack()
 	runtime/debug/stack.go:26 +0x5e
 github.com/microsoft/TypeScript/tsc/cmd/tsc.runMain()
 	github.com/microsoft/TypeScript/tsc/cmd/tsc/main.go:17 +0x20
-github.com/zshannon/TypeScript/public/lsp.(*Server).recover(0xc0001c6e08, {0x441ae5?, 0xc000e976c0?}, 0xc00ab6c7b0)
-	github.com/zshannon/TypeScript/public/lsp/server.go:777 +0x58
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).recover(0xc0001c6e08, {0x441ae5?, 0xc000e976c0?}, 0xc00ab6c7b0)
+	github.com/zshannon/TypeScript/public/v7/lsp/server.go:777 +0x58
 panic({0xc323a0?, 0x1780b90?})
 	runtime/panic.go:783 +0x132
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionData.func15()
-	github.com/zshannon/TypeScript/public/ls/completions.go:1303 +0xba
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionData.func18(...)
-	github.com/zshannon/TypeScript/public/ls/completions.go:1548
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionData(0xc008329200, {0x10f6688, 0xc00c2871d0}, 0xc00190b308, 0xc0001fe008, 0x1b, 0xc0008a2f00)
-	github.com/zshannon/TypeScript/public/ls/completions.go:1581 +0x1ed4
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getCompletionsAtPosition(0xc008329200, {0x10f6688, 0xc00c2871d0}, 0xc0001fe008, 0x1b, 0x0)
-	github.com/zshannon/TypeScript/public/ls/completions.go:347 +0x35f
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).ProvideCompletion(0xc008329200, {0x10f6688, 0xc00c287110}, {0xc00b472030?, 0xc00c287110?}, {0xb472030?, 0xc0?}, 0xc00c3ea000)
-	github.com/zshannon/TypeScript/public/ls/completions.go:47 +0x11c
-github.com/zshannon/TypeScript/public/lsp.(*Server).handleCompletion(0x418834?, {0x10f6688?, 0xc00c287110?}, 0xc00b472030?, 0x10f6688?)
-	github.com/zshannon/TypeScript/public/lsp/server.go:1105 +0x39
-github.com/zshannon/TypeScript/public/lsp.init.func1.registerLanguageServiceWithAutoImportsRequestHandler[...].28({0x10f6688, 0xc00c287110}, 0xc00ab6c7b0)
-	github.com/zshannon/TypeScript/public/lsp/server.go:682 +0x16c
-github.com/zshannon/TypeScript/public/lsp.(*Server).handleRequestOrNotification(0xc0001c6e08, {0x10f66c0?, 0xc006589180?}, 0xc00ab6c7b0)
-	github.com/zshannon/TypeScript/public/lsp/server.go:531 +0x1c6
-github.com/zshannon/TypeScript/public/lsp.(*Server).dispatchLoop.func1()
-	github.com/zshannon/TypeScript/public/lsp/server.go:414 +0x3a
-created by github.com/zshannon/TypeScript/public/lsp.(*Server).dispatchLoop in goroutine 35
-	github.com/zshannon/TypeScript/public/lsp/server.go:438 +0x9f1`
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionData.func15()
+	github.com/zshannon/TypeScript/public/v7/ls/completions.go:1303 +0xba
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionData.func18(...)
+	github.com/zshannon/TypeScript/public/v7/ls/completions.go:1548
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionData(0xc008329200, {0x10f6688, 0xc00c2871d0}, 0xc00190b308, 0xc0001fe008, 0x1b, 0xc0008a2f00)
+	github.com/zshannon/TypeScript/public/v7/ls/completions.go:1581 +0x1ed4
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getCompletionsAtPosition(0xc008329200, {0x10f6688, 0xc00c2871d0}, 0xc0001fe008, 0x1b, 0x0)
+	github.com/zshannon/TypeScript/public/v7/ls/completions.go:347 +0x35f
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).ProvideCompletion(0xc008329200, {0x10f6688, 0xc00c287110}, {0xc00b472030?, 0xc00c287110?}, {0xb472030?, 0xc0?}, 0xc00c3ea000)
+	github.com/zshannon/TypeScript/public/v7/ls/completions.go:47 +0x11c
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).handleCompletion(0x418834?, {0x10f6688?, 0xc00c287110?}, 0xc00b472030?, 0x10f6688?)
+	github.com/zshannon/TypeScript/public/v7/lsp/server.go:1105 +0x39
+github.com/zshannon/TypeScript/public/v7/lsp.init.func1.registerLanguageServiceWithAutoImportsRequestHandler[...].28({0x10f6688, 0xc00c287110}, 0xc00ab6c7b0)
+	github.com/zshannon/TypeScript/public/v7/lsp/server.go:682 +0x16c
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).handleRequestOrNotification(0xc0001c6e08, {0x10f66c0?, 0xc006589180?}, 0xc00ab6c7b0)
+	github.com/zshannon/TypeScript/public/v7/lsp/server.go:531 +0x1c6
+github.com/zshannon/TypeScript/public/v7/lsp.(*Server).dispatchLoop.func1()
+	github.com/zshannon/TypeScript/public/v7/lsp/server.go:414 +0x3a
+created by github.com/zshannon/TypeScript/public/v7/lsp.(*Server).dispatchLoop in goroutine 35
+	github.com/zshannon/TypeScript/public/v7/lsp/server.go:438 +0x9f1`
 
 	baseline.Run(t, "completionsReleaseStackTrace.md", sanitizedStackTraceBaselineContents(t, input, sanitizeStackTrace(input)), baseline.Options{
 		Subfolder: "lsp/stackSanitizer/",
@@ -114,16 +114,16 @@ runtime/debug.Stack()
 	runtime/debug/stack.go:26 +0x5e
 github.com/microsoft/TypeScript/tsc/cmd/tsc.runMain()
 	github.com/microsoft/TypeScript/tsc/cmd/tsc/main.go:17 +0x20
-github.com/zshannon/TypeScript/public/ls.(*LanguageService).getSignatureHelp(0x1)
-	github.com/zshannon/TypeScript/public/ls/signature.go:42 +0x10
-github.com/zshannon/TypeScript/public/ls.LookupKey(0x2)
-	github.com/zshannon/TypeScript/public/ls/keys.go:7 +0x10
-github.com/zshannon/TypeScript/public/ls.validateToken(0x3)
-	github.com/zshannon/TypeScript/public/ls/token.go:9 +0x10
-github.com/zshannon/TypeScript/public/ls.signRequest(0x4)
-	github.com/zshannon/TypeScript/public/ls/sig.go:11 +0x10
-github.com/zshannon/TypeScript/public/ls.setPwd(0x5)
-	github.com/zshannon/TypeScript/public/ls/pwd.go:13 +0x10`
+github.com/zshannon/TypeScript/public/v7/ls.(*LanguageService).getSignatureHelp(0x1)
+	github.com/zshannon/TypeScript/public/v7/ls/signature.go:42 +0x10
+github.com/zshannon/TypeScript/public/v7/ls.LookupKey(0x2)
+	github.com/zshannon/TypeScript/public/v7/ls/keys.go:7 +0x10
+github.com/zshannon/TypeScript/public/v7/ls.validateToken(0x3)
+	github.com/zshannon/TypeScript/public/v7/ls/token.go:9 +0x10
+github.com/zshannon/TypeScript/public/v7/ls.signRequest(0x4)
+	github.com/zshannon/TypeScript/public/v7/ls/sig.go:11 +0x10
+github.com/zshannon/TypeScript/public/v7/ls.setPwd(0x5)
+	github.com/zshannon/TypeScript/public/v7/ls/pwd.go:13 +0x10`
 
 	output := sanitizeStackTrace(input)
 	if loc := vscodeGenericSecretRegex.FindStringIndex(output); loc != nil {

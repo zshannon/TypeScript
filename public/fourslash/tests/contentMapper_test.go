@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/fourslash"
-	"github.com/zshannon/TypeScript/public/testutil/contentmappertest"
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil/contentmappertest"
 )
 
 func newContentMapperFourslash(t *testing.T, content, mapper string, extensions ...string) (*fourslash.FourslashTest, func()) {

@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
 )
 
 func TestCompilerOptionsDeclaration(t *testing.T) {

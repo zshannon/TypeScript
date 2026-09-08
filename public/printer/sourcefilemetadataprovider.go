@@ -1,8 +1,8 @@
 package printer
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 type SourceFileMetaDataProvider interface {

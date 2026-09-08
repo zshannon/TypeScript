@@ -3,17 +3,17 @@ package ls
 import (
 	"context"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/astnav"
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/ls/lsutil"
-	"github.com/zshannon/TypeScript/public/scanner"
-	"github.com/zshannon/TypeScript/public/spanmap"
-	"github.com/zshannon/TypeScript/public/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/astnav"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsutil"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
+	"github.com/zshannon/TypeScript/public/v7/spanmap"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
 
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
 )
 
 func (l *LanguageService) ProvideDocumentHighlights(ctx context.Context, documentUri lsproto.DocumentUri, documentPosition lsproto.Position) (lsproto.DocumentHighlightResponse, error) {

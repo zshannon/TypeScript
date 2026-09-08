@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/bundled"
-	"github.com/zshannon/TypeScript/public/jsonrpc"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/project"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/bundled"
+	"github.com/zshannon/TypeScript/public/v7/jsonrpc"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/project"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 )
 
 type shutdownTestReader struct{}

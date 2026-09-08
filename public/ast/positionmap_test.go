@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
 )
 
 func TestPositionMapASCII(t *testing.T) {

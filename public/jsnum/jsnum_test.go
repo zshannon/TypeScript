@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/testutil/jstest"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/testutil/jstest"
 	"gotest.tools/v3/assert"
 )
 

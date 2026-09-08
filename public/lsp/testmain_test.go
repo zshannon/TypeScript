@@ -3,8 +3,8 @@ package lsp
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/testutil/baseline"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/testutil/baseline"
 )
 
 func TestMain(m *testing.M) {

@@ -7,14 +7,14 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/spanmap"
-	"github.com/zshannon/TypeScript/public/stringutil"
-	"github.com/zshannon/TypeScript/public/testrunner"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/spanmap"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/testrunner"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 // Inserted in source files by surrounding desired text

@@ -1,9 +1,9 @@
 package checker
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
 )
 
 func (c *Checker) checkUnmatchedJSDocParameters(node *ast.Node) {

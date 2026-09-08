@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 )
 
 func TestWatch(t *testing.T) {

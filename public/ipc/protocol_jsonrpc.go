@@ -3,8 +3,8 @@ package ipc
 import (
 	"io"
 
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/jsonrpc"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/jsonrpc"
 )
 
 // JSONRPCProtocol implements the Protocol interface using JSON-RPC 2.0

@@ -8,11 +8,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/jsonrpc"
-	"github.com/zshannon/TypeScript/public/lsp"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/jsonrpc"
+	"github.com/zshannon/TypeScript/public/v7/lsp"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
 	"golang.org/x/sync/errgroup"
 	"gotest.tools/v3/assert"
 )

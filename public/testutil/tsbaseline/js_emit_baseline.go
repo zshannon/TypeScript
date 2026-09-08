@@ -5,16 +5,16 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnosticwriter"
-	"github.com/zshannon/TypeScript/public/outputpaths"
-	"github.com/zshannon/TypeScript/public/parser"
-	"github.com/zshannon/TypeScript/public/testutil/baseline"
-	"github.com/zshannon/TypeScript/public/testutil/harnessutil"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnosticwriter"
+	"github.com/zshannon/TypeScript/public/v7/outputpaths"
+	"github.com/zshannon/TypeScript/public/v7/parser"
+	"github.com/zshannon/TypeScript/public/v7/testutil/baseline"
+	"github.com/zshannon/TypeScript/public/v7/testutil/harnessutil"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 func DoJSEmitBaseline(

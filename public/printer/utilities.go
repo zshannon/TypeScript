@@ -7,12 +7,12 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/scanner"
-	"github.com/zshannon/TypeScript/public/sourcemap"
-	"github.com/zshannon/TypeScript/public/stringutil"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
+	"github.com/zshannon/TypeScript/public/v7/sourcemap"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 type getLiteralTextFlags int

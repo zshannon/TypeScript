@@ -7,11 +7,11 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/bundled"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/bundled"
+	"github.com/zshannon/TypeScript/public/v7/json"
 
-	"github.com/zshannon/TypeScript/public/jsonrpc"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/jsonrpc"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 type DocumentUri string // !!!

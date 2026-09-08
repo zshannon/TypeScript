@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 // This file provides a single reflection-driven object decoder that replaces

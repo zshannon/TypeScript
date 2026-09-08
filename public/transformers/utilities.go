@@ -3,10 +3,10 @@ package transformers
 import (
 	"slices"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/printer"
-	"github.com/zshannon/TypeScript/public/scanner"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/printer"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
 )
 
 func IsGeneratedIdentifier(emitContext *printer.EmitContext, name *ast.IdentifierNode) bool {

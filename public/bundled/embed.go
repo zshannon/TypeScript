@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 const embedded = true

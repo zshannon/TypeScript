@@ -4,13 +4,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/module"
-	"github.com/zshannon/TypeScript/public/symlinks"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs"
-	"github.com/zshannon/TypeScript/public/vfs/cachedvfs"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/module"
+	"github.com/zshannon/TypeScript/public/v7/symlinks"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs/cachedvfs"
 )
 
 type projectReferenceDtsFakingHost struct {

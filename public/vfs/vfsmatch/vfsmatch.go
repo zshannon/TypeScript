@@ -6,10 +6,10 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 //go:generate go tool golang.org/x/tools/cmd/stringer -type=Usage -trimprefix=Usage -output=stringer_generated.go

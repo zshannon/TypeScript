@@ -5,7 +5,7 @@ package encoder
 import (
 	"fmt"
 
-	"github.com/zshannon/TypeScript/public/ast"
+	"github.com/zshannon/TypeScript/public/v7/ast"
 )
 
 func getNodeDataType(node *ast.Node) uint32 {

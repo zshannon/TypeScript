@@ -3,9 +3,9 @@ package tsc
 import (
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 // extendedConfigCache is a minimal implementation of tsoptions.ExtendedConfigCache.

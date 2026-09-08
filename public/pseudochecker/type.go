@@ -1,7 +1,7 @@
 package pseudochecker
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
+	"github.com/zshannon/TypeScript/public/v7/ast"
 )
 
 // `PseudoType`s are skeletons of types - partially interpreted expressions and type nodes

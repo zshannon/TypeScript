@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 type supplementalGlobalsHandler struct{ noNotifications }

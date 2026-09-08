@@ -1,8 +1,8 @@
 package tsoptions
 
 import (
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
 )
 
 var OptionsForWatch = []*CommandLineOption{

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/ipc"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/ipc"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 // callbackFS wraps a base filesystem and delegates certain operations

@@ -3,7 +3,7 @@ package sourcemap
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 	"gotest.tools/v3/assert"
 )
 

@@ -8,7 +8,7 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/zshannon/TypeScript/public/stringutil"
+	"github.com/zshannon/TypeScript/public/v7/stringutil"
 )
 
 type Path string

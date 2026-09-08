@@ -1,6 +1,6 @@
 package format
 
-import "github.com/zshannon/TypeScript/public/ast"
+import "github.com/zshannon/TypeScript/public/v7/ast"
 
 type ruleImpl struct {
 	debugName string

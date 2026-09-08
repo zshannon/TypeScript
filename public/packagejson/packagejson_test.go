@@ -5,14 +5,14 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/packagejson"
-	"github.com/zshannon/TypeScript/public/parser"
-	"github.com/zshannon/TypeScript/public/repo"
-	"github.com/zshannon/TypeScript/public/testutil/filefixture"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/packagejson"
+	"github.com/zshannon/TypeScript/public/v7/parser"
+	"github.com/zshannon/TypeScript/public/v7/repo"
+	"github.com/zshannon/TypeScript/public/v7/testutil/filefixture"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 	"gotest.tools/v3/assert"
 )
 

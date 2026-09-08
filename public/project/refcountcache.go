@@ -3,7 +3,7 @@ package project
 import (
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/collections"
+	"github.com/zshannon/TypeScript/public/v7/collections"
 )
 
 type refCountCacheEntry[V any] struct {

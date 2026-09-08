@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/execute"
-	"github.com/zshannon/TypeScript/public/execute/tsc"
-	"github.com/zshannon/TypeScript/public/testutil/baseline"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/execute"
+	"github.com/zshannon/TypeScript/public/v7/execute/tsc"
+	"github.com/zshannon/TypeScript/public/v7/testutil/baseline"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 type tscEdit struct {

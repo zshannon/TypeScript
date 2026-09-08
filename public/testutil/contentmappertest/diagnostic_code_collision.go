@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/diagnostics"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 type diagnosticCodeCollisionHandler struct{ noNotifications }

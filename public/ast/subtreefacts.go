@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 type SubtreeFacts uint32

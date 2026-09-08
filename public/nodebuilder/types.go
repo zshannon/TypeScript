@@ -2,7 +2,7 @@
 package nodebuilder
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
+	"github.com/zshannon/TypeScript/public/v7/ast"
 )
 
 // TODO: previously all symboltracker methods were optional, but now they're required.

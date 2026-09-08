@@ -5,7 +5,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/zshannon/TypeScript/public/collections"
+	"github.com/zshannon/TypeScript/public/v7/collections"
 )
 
 type BreadthFirstSearchResult[N any] struct {

@@ -7,9 +7,9 @@ import (
 	"io"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/fswatch"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/fswatch"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 type watchedDir struct {

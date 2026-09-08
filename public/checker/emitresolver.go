@@ -5,13 +5,13 @@ import (
 	"slices"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/binder"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/evaluator"
-	"github.com/zshannon/TypeScript/public/jsnum"
-	"github.com/zshannon/TypeScript/public/nodebuilder"
-	"github.com/zshannon/TypeScript/public/printer"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/binder"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/evaluator"
+	"github.com/zshannon/TypeScript/public/v7/jsnum"
+	"github.com/zshannon/TypeScript/public/v7/nodebuilder"
+	"github.com/zshannon/TypeScript/public/v7/printer"
 )
 
 var _ printer.EmitResolver = (*EmitResolver)(nil)

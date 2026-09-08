@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/zshannon/TypeScript/public/bundled"
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/ipc"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/project"
-	"github.com/zshannon/TypeScript/public/vfs/osvfs"
+	"github.com/zshannon/TypeScript/public/v7/bundled"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/ipc"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/project"
+	"github.com/zshannon/TypeScript/public/v7/vfs/osvfs"
 )
 
 // StdioServerOptions configures the STDIO-based API server.

@@ -11,7 +11,11 @@ import (
 	"testing"
 )
 
-const fixtureSourceModule = "github.com/microsoft/TypeScript/tsc"
+const (
+	fixtureSourceModule = "github.com/microsoft/TypeScript/tsc"
+	legacySourceModule  = "github.com/microsoft/typescript-go"
+	fixturePublicModule = "github.com/zshannon/TypeScript/public/v7"
+)
 
 func TestExportModuleCopiesWholeTreeAndRewritesCompilerImports(t *testing.T) {
 	repo := newFixtureRepo(t)
@@ -20,15 +24,15 @@ func TestExportModuleCopiesWholeTreeAndRewritesCompilerImports(t *testing.T) {
 		t.Fatalf("exportModule() error = %v", err)
 	}
 
-	assertFileContent(t, filepath.Join(repo, "public", "go.mod"), "module github.com/zshannon/TypeScript/public\n\ngo 1.26\n")
+	assertFileContent(t, filepath.Join(repo, "public", "go.mod"), "module "+fixturePublicModule+"\n\ngo 1.26\n")
 	assertFileContent(t, filepath.Join(repo, "public", "go.sum"), "example.com/dependency v1.0.0 h1:fixture\n")
 	assertFileContent(t, filepath.Join(repo, "public", "LICENSE"), "fixture license\n")
 	assertFileContent(t, filepath.Join(repo, "public", "NOTICE"), "fixture notice\n")
 
 	alpha := readFile(t, filepath.Join(repo, "public", "alpha", "alpha.go"))
 	for _, want := range []string{
-		`"github.com/zshannon/TypeScript/public/beta"`,
-		`"github.com/zshannon/TypeScript/public/vfs/internals"`,
+		`"` + fixturePublicModule + `/beta"`,
+		`"` + fixturePublicModule + `/vfs/internals"`,
 		"func Exported() {}",
 		"func private() {}",
 	} {
@@ -40,7 +44,7 @@ func TestExportModuleCopiesWholeTreeAndRewritesCompilerImports(t *testing.T) {
 		t.Errorf("generated alpha.go retains source module import:\n%s", alpha)
 	}
 	generator := readFile(t, filepath.Join(repo, "public", "alpha", "generate.go"))
-	if !bytes.Contains(generator, []byte(publicModule+"/vfs/internals")) {
+	if !bytes.Contains(generator, []byte(fixturePublicModule+"/vfs/internals")) {
 		t.Errorf("generated source generator does not use the public nested package path:\n%s", generator)
 	}
 	if bytes.Contains(generator, []byte(fixtureSourceModule+"/internal")) {
@@ -61,16 +65,60 @@ func TestExportModuleCopiesWholeTreeAndRewritesCompilerImports(t *testing.T) {
 	readme := readFile(t, filepath.Join(repo, "public", "README.md"))
 	for _, want := range []string{
 		"generated from every package under `tsc/internal`",
-		"github.com/zshannon/TypeScript/public/parser",
-		"pin a commit using its Go pseudo-version",
+		fixturePublicModule + "/parser",
+		fixturePublicModule + "@v7.0.2",
+		"corresponds to TypeScript 7.0.2",
+		"current generated source is `7.1.0-dev`, a development version",
 		"go run ./scripts/export-go.go --check",
 	} {
 		if !bytes.Contains(readme, []byte(want)) {
 			t.Errorf("generated README.md does not contain %q", want)
 		}
 	}
-	if bytes.Contains(readme, []byte("release tag")) {
-		t.Error("generated README.md describes a separate release-tag process")
+	if bytes.Contains(readme, []byte("pseudo-version")) {
+		t.Error("generated README.md describes commit-only pseudo-version pinning")
+	}
+}
+
+func TestExportModuleDerivesPublicMajorFromSourceVersion(t *testing.T) {
+	repo := newFixtureRepo(t)
+	if err := os.Remove(filepath.Join(repo, "NOTICE.txt")); err != nil {
+		t.Fatalf("Remove(root NOTICE.txt): %v", err)
+	}
+	writeFixtureFile(t, filepath.Join(repo, "tsc", "NOTICE.txt"), []byte("compiler notice\n"))
+	writeFixtureFile(t, filepath.Join(repo, "tsc", "internal", "core", "version.go"), []byte("package core\n\nvar version = \"8.2.3\"\n"))
+	writeFixtureFile(t, filepath.Join(repo, "tsc", "go.mod"), []byte("module "+legacySourceModule+"\n\ngo 1.26\n"))
+	writeFixtureFile(t, filepath.Join(repo, "tsc", "internal", "alpha", "alpha.go"), []byte("package alpha\n\nimport (\n\t_ \""+legacySourceModule+"/internal/beta\"\n\t_ \""+legacySourceModule+"/internal/vfs/internal\"\n)\n"))
+	writeFixtureFile(t, filepath.Join(repo, "tsc", "internal", "alpha", "generate.go"), []byte("//go:build ignore\n\npackage main\n\nconst generatedImport = \"_ \\\""+legacySourceModule+"/internal/vfs/internal\\\"\"\n"))
+
+	if err := exportModule(repo, false); err != nil {
+		t.Fatalf("exportModule() error = %v", err)
+	}
+
+	const wantModule = "github.com/zshannon/TypeScript/public/v8"
+	assertFileContent(t, filepath.Join(repo, "public", "go.mod"), "module "+wantModule+"\n\ngo 1.26\n")
+	assertFileContent(t, filepath.Join(repo, "public", "NOTICE"), "compiler notice\n")
+	alpha := readFile(t, filepath.Join(repo, "public", "alpha", "alpha.go"))
+	if !bytes.Contains(alpha, []byte(wantModule+"/beta")) {
+		t.Errorf("generated alpha.go does not use derived v8 module path:\n%s", alpha)
+	}
+	if bytes.Contains(alpha, []byte(legacySourceModule+"/internal")) {
+		t.Errorf("generated alpha.go retains legacy source module path:\n%s", alpha)
+	}
+	readme := readFile(t, filepath.Join(repo, "public", "README.md"))
+	if !bytes.Contains(readme, []byte(wantModule+"/parser")) {
+		t.Errorf("generated README.md does not use derived v8 module path:\n%s", readme)
+	}
+	if !bytes.Contains(readme, []byte("current generated source is `8.2.3`, and its corresponding Go module version is `v8.2.3`")) {
+		t.Errorf("generated README.md does not align the stable Go and TypeScript versions:\n%s", readme)
+	}
+
+	var stdout, stderr strings.Builder
+	if exitCode := run([]string{"--version"}, repo, &stdout, &stderr); exitCode != 0 {
+		t.Fatalf("run(--version) exit code = %d, stderr = %q", exitCode, stderr.String())
+	}
+	if got, want := stdout.String(), "v8.2.3\n"; got != want {
+		t.Errorf("run(--version) output = %q, want %q", got, want)
 	}
 }
 
@@ -144,6 +192,7 @@ func newFixtureRepo(t *testing.T) string {
 		"tsc/internal/assets/embed.go":            []byte("package assets\n\nimport _ \"embed\"\n\n//go:embed data/message.bin\nvar message []byte\n"),
 		"tsc/internal/assets/data/message.bin":    {0, 1, 2, 0xff, '\n'},
 		"tsc/internal/beta/beta.go":               []byte("package beta\n"),
+		"tsc/internal/core/version.go":            []byte("package core\n\nvar version = \"7.1.0-dev\"\n"),
 		"tsc/internal/vfs/internal/helper.go":     []byte("package internal\n"),
 		"tsc/internal/vfs/internalized/helper.go": []byte("package internalized\n"),
 	}

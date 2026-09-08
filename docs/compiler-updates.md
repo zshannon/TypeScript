@@ -24,8 +24,12 @@ The App installation and settings are separate repository setup steps. Preparing
 
 ## Consume updates
 
-Committed `public/` source is consumable by commit as soon as its branch is public. Consumers use normal `go get github.com/zshannon/TypeScript/public@<commit>`; Go records a pseudo-version for that commit. There is no custom tagging workflow or separate release numbering scheme. After review and merge, the server can update its pinned compiler dependency to that commit.
+The Go release number matches TypeScript exactly: TypeScript `7.0.2` produces Go module version `v7.0.2`. The public module uses `github.com/zshannon/TypeScript/public/v7`, with Go's standard submodule tag `public/v7.0.2`.
+
+Run **Release public Go module** with the reviewed stable release branch selected in GitHub Actions. The workflow uses that selected revision, with no separately entered version number. It reads the compiler source version and validates it against the corresponding official Microsoft release tag before tagging a reviewed fork revision. Stable release source must descend from that upstream tag. It checks generation and external module consumption before publishing, and never overwrites a tag. Development main (`7.1.0-dev` when this branch was prepared) cannot be labeled as a stable `7.0.2` release.
+
+After a release is published, the server can use `go get github.com/zshannon/TypeScript/public/v7@v7.0.2`. Source-update PRs still track upstream main; stable release preparation starts from the matching upstream release tag and carries the fork's reviewed compiler and publication changes.
 
 ## Server migration
 
-The old `zshannon/typescript-go` repository retains the server, native React compiler work in PR #15, and its existing deployment history. The next phase moves server code to its own module and replaces its direct compiler-internal imports with `github.com/zshannon/TypeScript/public/...`. Its esbuild and Oxc updates and Docker publishing belong there. This compiler branch contains no server or Docker deployment workflow.
+The old `zshannon/typescript-go` repository retains the server, native React compiler work in PR #15, and its existing deployment history. The next phase moves server code to its own module and replaces its direct compiler-internal imports with `github.com/zshannon/TypeScript/public/v7/...`. Its esbuild and Oxc updates and Docker publishing belong there. This compiler branch contains no server or Docker deployment workflow.

@@ -8,10 +8,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/locale"
-	"github.com/zshannon/TypeScript/public/testutil/contentmappertest"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/locale"
+	"github.com/zshannon/TypeScript/public/v7/testutil/contentmappertest"
 	"gotest.tools/v3/assert"
 )
 

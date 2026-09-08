@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/execute"
-	"github.com/zshannon/TypeScript/public/execute/tsc"
-	"github.com/zshannon/TypeScript/public/fswatch"
+	"github.com/zshannon/TypeScript/public/v7/execute"
+	"github.com/zshannon/TypeScript/public/v7/execute/tsc"
+	"github.com/zshannon/TypeScript/public/v7/fswatch"
 	"gotest.tools/v3/assert"
 )
 

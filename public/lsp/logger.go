@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/project/logging"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/project/logging"
 )
 
 var _ logging.Logger = (*logger)(nil)

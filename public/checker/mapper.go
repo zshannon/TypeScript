@@ -3,7 +3,7 @@ package checker
 import (
 	"slices"
 
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 // TypeMapperKind

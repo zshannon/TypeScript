@@ -6,7 +6,7 @@ package projecttestutil
 import (
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/project/ata"
+	"github.com/zshannon/TypeScript/public/v7/project/ata"
 )
 
 // Ensure, that NpmExecutorMock does implement ata.NpmExecutor.

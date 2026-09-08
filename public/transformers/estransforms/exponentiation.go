@@ -1,8 +1,8 @@
 package estransforms
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/transformers"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/transformers"
 )
 
 type exponentiationTransformer struct {

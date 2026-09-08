@@ -1,8 +1,8 @@
 package packagejson
 
 import (
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 type objectKind int8

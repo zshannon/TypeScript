@@ -5,8 +5,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
 	"gotest.tools/v3/assert"
 )
 

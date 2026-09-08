@@ -11,8 +11,8 @@ import (
 	"testing/fstest"
 	"unicode/utf16"
 
-	"github.com/zshannon/TypeScript/public/testutil"
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 	"gotest.tools/v3/assert"
 )
 

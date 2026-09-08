@@ -1,8 +1,8 @@
 package checker
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/nodebuilder"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/nodebuilder"
 )
 
 type SymbolTrackerImpl struct {

@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/testutil/contentmappertest"
-	"github.com/zshannon/TypeScript/public/testutil/stringtestutil"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/testutil/contentmappertest"
+	"github.com/zshannon/TypeScript/public/v7/testutil/stringtestutil"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 )
 
 func TestTscCommandline(t *testing.T) {

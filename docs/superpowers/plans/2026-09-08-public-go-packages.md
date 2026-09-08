@@ -10,7 +10,7 @@ generated-by: GPT-6 Astra Ultra
 
 ## Constraints
 
-1. Module `github.com/zshannon/TypeScript/public`; all compiler packages, no symbol allowlist.
+1. Module `github.com/zshannon/TypeScript/public/v7` (major follows upstream); all compiler packages, no symbol allowlist.
 2. Preserve assets, platform/build constraints, and compiler patches; rewrite nested `internal` segments to `internals` only in generated output.
 3. Deterministic committed output with stale-file deletion and check mode; no source-tree relocation.
 4. Genuine public fork and merge ancestry; only our workflows; no auto merge or deployment.
@@ -19,22 +19,22 @@ generated-by: GPT-6 Astra Ultra
 
 Files: `scripts/export-go.go`, `scripts/export-go_test.go`, generated `public/**`.
 Interface: `go run ./scripts/export-go.go` generates; `go run ./scripts/export-go.go --check` verifies without modifying.
-- [ ] Write fixture tests covering cross-package imports, nested internal directories, embedded/binary assets, build constraints, stale output removal, idempotence, and check mode.
-- [ ] Implement the deterministic whole-package projection; generate go.mod/go.sum/license and consumption documentation.
-- [ ] Run `go test ./scripts/export-go.go ./scripts/export-go_test.go`, check mode, and `GOWORK=off go build ./...` inside public.
+- [x] Write fixture tests covering cross-package imports, nested internal directories, embedded/binary assets, build constraints, stale output removal, idempotence, and check mode.
+- [x] Implement the deterministic whole-package projection; generate go.mod/go.sum/license and consumption documentation.
+- [x] Run `go test ./scripts/export-go.go ./scripts/export-go_test.go`, check mode, and `GOWORK=off go build ./...` inside public.
 
 ## Task 2: Isolate compiler CI and automate upstream updates
 
 Files: `.github/workflows/**`, `.github/scripts/**`, `scripts/test-public-module.sh`, external smoke example under `scripts/testdata/public-consumer`, README and compiler publication docs.
 Consumes: Task 1 command and module path.
-- [ ] Keep only compiler package validation and upstream sync workflows.
-- [ ] Verify consumption in an unrelated temporary module, with real parse/typecheck assertions and standard libraries.
-- [ ] Reuse tested upstream workflow-ownership merge scripts; regenerate/commit public output before update PR push.
-- [ ] Consume the public module through ordinary Go commit pinning; create no release workflow or custom tags.
-- [ ] Run script/YAML checks, existing sync integration cases, source compiler regressions, module consumer tests, and representative cross-platform builds.
+- [ ] Keep only our compiler package validation, publication, and upstream sync workflows.
+- [x] Verify consumption in an unrelated temporary module, with real parse/typecheck assertions and standard libraries.
+- [x] Reuse tested upstream workflow-ownership merge scripts; regenerate/commit public output before update PR push.
+- [x] Publish matching upstream TypeScript versions using standard Go submodule tags; verify source/version alignment and immutable tags.
+- [x] Run script/YAML checks, existing sync integration cases, source compiler regressions, module consumer tests, and representative cross-platform builds.
 
 ## Task 3: Review and publish
 
-- [ ] Review generator, external-consumer proof, workflow ownership/regeneration, and release behavior together; fix material findings.
+- [x] Review generator, external-consumer proof, workflow ownership/regeneration, and release behavior together; fix material findings.
 - [ ] Commit and save the branch to the original repository without changing its checkout.
 - [ ] Push to the real public fork and open a draft PR; verify repository parent, visibility, and remote commit SHA. Do not merge or activate deployment.

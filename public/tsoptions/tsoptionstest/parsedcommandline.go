@@ -1,8 +1,8 @@
 package tsoptionstest
 
 import (
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 	"gotest.tools/v3/assert"
 )
 

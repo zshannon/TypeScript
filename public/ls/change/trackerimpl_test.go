@@ -3,7 +3,7 @@ package change
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
 )
 
 func TestTextEditsConflictAtSameInsertionPointAcrossProjections(t *testing.T) {

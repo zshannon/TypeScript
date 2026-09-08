@@ -3,7 +3,7 @@ package collections_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/collections"
+	"github.com/zshannon/TypeScript/public/v7/collections"
 	"gotest.tools/v3/assert"
 )
 

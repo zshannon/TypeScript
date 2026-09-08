@@ -4,13 +4,13 @@ import (
 	"maps"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/project/ata"
-	"github.com/zshannon/TypeScript/public/project/logging"
-	"github.com/zshannon/TypeScript/public/semver"
-	"github.com/zshannon/TypeScript/public/testutil/projecttestutil"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/project/ata"
+	"github.com/zshannon/TypeScript/public/v7/project/logging"
+	"github.com/zshannon/TypeScript/public/v7/semver"
+	"github.com/zshannon/TypeScript/public/v7/testutil/projecttestutil"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 	"gotest.tools/v3/assert"
 )
 

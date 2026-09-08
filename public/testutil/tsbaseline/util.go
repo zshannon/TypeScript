@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/tspath"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
 )
 
 var (

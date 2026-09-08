@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/json"
 )
 
 // Meta model version 3.18.0

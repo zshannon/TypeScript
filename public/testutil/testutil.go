@@ -7,7 +7,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/testutil/race"
+	"github.com/zshannon/TypeScript/public/v7/testutil/race"
 	"gotest.tools/v3/assert"
 )
 

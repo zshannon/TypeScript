@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 func TestParseCompilerOptionNoMissingFields(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"slices"
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
 )
 
 type OutputRecorderFS struct {

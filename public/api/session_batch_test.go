@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/testutil/projecttestutil"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/testutil/projecttestutil"
 	"gotest.tools/v3/assert"
 )
 

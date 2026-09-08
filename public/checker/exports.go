@@ -1,8 +1,8 @@
 package checker
 
 import (
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/diagnostics"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/diagnostics"
 )
 
 func (c *Checker) GetStringType() *Type {

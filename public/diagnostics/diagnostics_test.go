@@ -3,7 +3,7 @@ package diagnostics
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/locale"
+	"github.com/zshannon/TypeScript/public/v7/locale"
 	"golang.org/x/text/language"
 	"gotest.tools/v3/assert"
 )

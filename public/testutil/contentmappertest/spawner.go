@@ -5,8 +5,8 @@ import (
 	"io"
 	"net"
 
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/ipc"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/ipc"
 )
 
 // Serve drives the transforming mapper over the connection until it closes or ctx is cancelled.

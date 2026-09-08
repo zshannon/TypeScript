@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/zshannon/TypeScript/public/compiler"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
 )
 
 type tableRow struct {

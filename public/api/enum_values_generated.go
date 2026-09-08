@@ -12,14 +12,14 @@ import (
 	"encoding/json"
 	"os"
 
-	ast "github.com/zshannon/TypeScript/public/ast"
-	checker "github.com/zshannon/TypeScript/public/checker"
-	compiler "github.com/zshannon/TypeScript/public/compiler"
-	core "github.com/zshannon/TypeScript/public/core"
-	diagnostics "github.com/zshannon/TypeScript/public/diagnostics"
-	lsproto "github.com/zshannon/TypeScript/public/lsp/lsproto"
-	nodebuilder "github.com/zshannon/TypeScript/public/nodebuilder"
-	spanmap "github.com/zshannon/TypeScript/public/spanmap"
+	ast "github.com/zshannon/TypeScript/public/v7/ast"
+	checker "github.com/zshannon/TypeScript/public/v7/checker"
+	compiler "github.com/zshannon/TypeScript/public/v7/compiler"
+	core "github.com/zshannon/TypeScript/public/v7/core"
+	diagnostics "github.com/zshannon/TypeScript/public/v7/diagnostics"
+	lsproto "github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	nodebuilder "github.com/zshannon/TypeScript/public/v7/nodebuilder"
+	spanmap "github.com/zshannon/TypeScript/public/v7/spanmap"
 )
 
 func main() {

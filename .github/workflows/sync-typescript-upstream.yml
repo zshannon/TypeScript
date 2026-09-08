@@ -1,0 +1,178 @@
+name: Sync TypeScript upstream
+
+on:
+  schedule:
+    - cron: '0 17 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: typescript-upstream-sync
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  prepare-merge-pr:
+    name: Prepare upstream merge PR
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      AUTOMATION_BRANCH: automation/typescript-upstream
+      TARGET_BRANCH: main
+      UPSTREAM_URL: https://github.com/microsoft/TypeScript.git
+
+    steps:
+      - name: Check GitHub App configuration
+        env:
+          UPSTREAM_SYNC_APP_ID: ${{ vars.UPSTREAM_SYNC_APP_ID }}
+          UPSTREAM_SYNC_APP_PRIVATE_KEY: ${{ secrets.UPSTREAM_SYNC_APP_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$UPSTREAM_SYNC_APP_ID" || -z "$UPSTREAM_SYNC_APP_PRIVATE_KEY" ]]; then
+            echo "::error title=Missing upstream sync credentials::Install the upstream sync GitHub App, set repository variable UPSTREAM_SYNC_APP_ID, and set repository secret UPSTREAM_SYNC_APP_PRIVATE_KEY. See docs/compiler-updates.md."
+            exit 1
+          fi
+
+      - name: Create repository-scoped GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.UPSTREAM_SYNC_APP_ID }}
+          private-key: ${{ secrets.UPSTREAM_SYNC_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+          permission-workflows: write
+
+      - name: Check out full repository history
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
+          persist-credentials: true
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Fetch target and upstream branches
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null 2>&1; then
+            git fetch --no-tags origin "+refs/heads/${AUTOMATION_BRANCH}:refs/remotes/origin/${AUTOMATION_BRANCH}"
+            git switch --create "$AUTOMATION_BRANCH" --track "origin/$AUTOMATION_BRANCH"
+          else
+            git switch --create "$AUTOMATION_BRANCH" "origin/$TARGET_BRANCH"
+          fi
+          git remote add typescript-upstream "$UPSTREAM_URL"
+          git fetch --no-tags typescript-upstream "+refs/heads/main:refs/remotes/typescript-upstream/main"
+
+      - name: Record stable branch head
+        id: baseline
+        run: echo "initial_head=$(git rev-parse HEAD)" >>"$GITHUB_OUTPUT"
+
+      - name: Configure merge commit identity
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: |
+          set -euo pipefail
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${APP_SLUG}[bot]@users.noreply.github.com"
+
+      - name: Merge target and TypeScript upstream
+        id: merge
+        run: .github/scripts/merge-typescript-upstream.sh "origin/$TARGET_BRANCH" typescript-upstream/main
+
+      - name: Set up Go from the compiler module
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: tsc/go.mod
+          cache-dependency-path: tsc/go.sum
+
+      - name: Regenerate the public Go module
+        run: |
+          set -euo pipefail
+          go run ./scripts/export-go.go
+          git add --all -- public
+          if ! git diff --cached --quiet; then
+            git commit -m "Regenerate public Go module"
+          fi
+
+      - name: Recompute branch state after generation
+        id: state
+        env:
+          INITIAL_HEAD: ${{ steps.baseline.outputs.initial_head }}
+        run: |
+          set -euo pipefail
+          final_head=$(git rev-parse HEAD)
+          ahead_count=$(git rev-list --count "origin/${TARGET_BRANCH}..HEAD")
+          branch_changed=false
+          if [[ "$final_head" != "$INITIAL_HEAD" ]]; then
+            branch_changed=true
+          fi
+          echo "ahead_count=$ahead_count" >>"$GITHUB_OUTPUT"
+          echo "branch_changed=$branch_changed" >>"$GITHUB_OUTPUT"
+
+      - name: Skip when the fork and generated module are current
+        if: steps.state.outputs.ahead_count == '0'
+        run: |
+          echo "The target branch already contains TypeScript upstream at ${{ steps.merge.outputs.upstream_sha }} and current generated output."
+          {
+            echo "## TypeScript compiler fork is current"
+            echo
+            echo "No merge PR is needed. The target contains upstream commit \`${{ steps.merge.outputs.upstream_sha }}\` and current public packages."
+          } >>"$GITHUB_STEP_SUMMARY"
+
+      - name: Push the stable automation branch
+        if: steps.state.outputs.ahead_count != '0' && steps.state.outputs.branch_changed == 'true'
+        run: git push --set-upstream origin "$AUTOMATION_BRANCH"
+
+      - name: Create or refresh the review PR
+        if: steps.state.outputs.ahead_count != '0'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          UPSTREAM_SHA: ${{ steps.merge.outputs.upstream_sha }}
+        run: |
+          set -euo pipefail
+          pr_body=$(mktemp)
+          trap 'rm -f "$pr_body"' EXIT
+          cat >"$pr_body" <<EOF
+          This PR merges Microsoft TypeScript \`main\` at \`$UPSTREAM_SHA\` into this fork and regenerates the public Go compiler module in the same stable branch.
+
+          Review the compiler source changes, generated \`public/**\` changes, and compiler-package CI results.
+
+          Preserve the upstream ancestry: merge this PR with a merge commit. Do not squash or rebase it. This automation never merges the PR or writes directly to \`main\`.
+          EOF
+
+          pr_number=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --base "$TARGET_BRANCH" \
+            --head "$AUTOMATION_BRANCH" \
+            --state open \
+            --json number \
+            --jq '.[0].number // empty')
+
+          if [[ -n $pr_number ]]; then
+            gh pr edit "$pr_number" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "Merge Microsoft TypeScript upstream" \
+              --body-file "$pr_body"
+            echo "Updated pull request #$pr_number."
+          else
+            gh pr create \
+              --repo "$GITHUB_REPOSITORY" \
+              --base "$TARGET_BRANCH" \
+              --head "$AUTOMATION_BRANCH" \
+              --title "Merge Microsoft TypeScript upstream" \
+              --body-file "$pr_body"
+          fi
+
+          {
+            echo "## TypeScript upstream review PR prepared"
+            echo
+            echo "The stable branch contains upstream commit \`$UPSTREAM_SHA\` and regenerated public packages. Existing branch commits were preserved and no force push was used."
+          } >>"$GITHUB_STEP_SUMMARY"

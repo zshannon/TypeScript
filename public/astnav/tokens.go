@@ -3,9 +3,9 @@ package astnav
 import (
 	"fmt"
 
-	"github.com/zshannon/TypeScript/public/ast"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/scanner"
+	"github.com/zshannon/TypeScript/public/v7/ast"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/scanner"
 )
 
 func shouldRescanLessThanLessThanToken(s *scanner.Scanner, containingNode *ast.Node, token ast.Kind) bool {

@@ -3,7 +3,7 @@ package outputpaths_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/outputpaths"
+	"github.com/zshannon/TypeScript/public/v7/outputpaths"
 	"gotest.tools/v3/assert"
 )
 

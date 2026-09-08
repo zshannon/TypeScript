@@ -3,7 +3,7 @@ package project
 import (
 	"sync"
 
-	"github.com/zshannon/TypeScript/public/compiler"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
 )
 
 type programCounter struct {

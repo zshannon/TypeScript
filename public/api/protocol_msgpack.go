@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/zshannon/TypeScript/public/ipc"
-	"github.com/zshannon/TypeScript/public/json"
-	"github.com/zshannon/TypeScript/public/jsonrpc"
+	"github.com/zshannon/TypeScript/public/v7/ipc"
+	"github.com/zshannon/TypeScript/public/v7/json"
+	"github.com/zshannon/TypeScript/public/v7/jsonrpc"
 )
 
 // MessageType represents the type of message in the msgpack protocol.

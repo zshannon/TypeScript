@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/execute/build"
-	"github.com/zshannon/TypeScript/public/execute/tsctests"
-	"github.com/zshannon/TypeScript/public/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/execute/build"
+	"github.com/zshannon/TypeScript/public/v7/execute/tsctests"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
 	"gotest.tools/v3/assert"
 )
 

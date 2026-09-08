@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/project/background"
+	"github.com/zshannon/TypeScript/public/v7/project/background"
 	"gotest.tools/v3/assert"
 )
 

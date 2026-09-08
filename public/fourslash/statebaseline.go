@@ -9,17 +9,17 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/compiler"
-	"github.com/zshannon/TypeScript/public/json"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/compiler"
+	"github.com/zshannon/TypeScript/public/v7/json"
 
-	"github.com/zshannon/TypeScript/public/ls/lsconv"
-	"github.com/zshannon/TypeScript/public/lsp/lsproto"
-	"github.com/zshannon/TypeScript/public/project"
-	"github.com/zshannon/TypeScript/public/testutil/fsbaselineutil"
-	"github.com/zshannon/TypeScript/public/testutil/lsptestutil"
-	"github.com/zshannon/TypeScript/public/tspath"
-	"github.com/zshannon/TypeScript/public/vfs/iovfs"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsconv"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/project"
+	"github.com/zshannon/TypeScript/public/v7/testutil/fsbaselineutil"
+	"github.com/zshannon/TypeScript/public/v7/testutil/lsptestutil"
+	"github.com/zshannon/TypeScript/public/v7/tspath"
+	"github.com/zshannon/TypeScript/public/v7/vfs/iovfs"
 	"gotest.tools/v3/assert"
 )
 

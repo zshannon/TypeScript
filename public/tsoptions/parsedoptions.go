@@ -1,8 +1,8 @@
 package tsoptions
 
 import (
-	"github.com/zshannon/TypeScript/public/contentmapper"
-	"github.com/zshannon/TypeScript/public/core"
+	"github.com/zshannon/TypeScript/public/v7/contentmapper"
+	"github.com/zshannon/TypeScript/public/v7/core"
 )
 
 type ParsedOptions struct {

@@ -1,9 +1,9 @@
 package module
 
 import (
-	"github.com/zshannon/TypeScript/public/collections"
-	"github.com/zshannon/TypeScript/public/core"
-	"github.com/zshannon/TypeScript/public/packagejson"
+	"github.com/zshannon/TypeScript/public/v7/collections"
+	"github.com/zshannon/TypeScript/public/v7/core"
+	"github.com/zshannon/TypeScript/public/v7/packagejson"
 )
 
 type ModeAwareCache[T any] map[ModeAwareCacheKey]T

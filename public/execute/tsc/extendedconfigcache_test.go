@@ -3,10 +3,10 @@ package tsc_test
 import (
 	"testing"
 
-	"github.com/zshannon/TypeScript/public/execute/tsc"
-	"github.com/zshannon/TypeScript/public/tsoptions"
-	"github.com/zshannon/TypeScript/public/vfs"
-	"github.com/zshannon/TypeScript/public/vfs/vfstest"
+	"github.com/zshannon/TypeScript/public/v7/execute/tsc"
+	"github.com/zshannon/TypeScript/public/v7/tsoptions"
+	"github.com/zshannon/TypeScript/public/v7/vfs"
+	"github.com/zshannon/TypeScript/public/v7/vfs/vfstest"
 )
 
 type testParseConfigHost struct {
