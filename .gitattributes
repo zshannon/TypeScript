@@ -2,3 +2,6 @@
 **/*.json linguist-language=jsonc
 * -text
 *.go text eol=lf
+
+# Public compiler packages are regenerated from tsc/internal.
+/public/** linguist-generated

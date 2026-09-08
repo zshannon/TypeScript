@@ -1,0 +1,43 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/fourslash"
+	. "github.com/zshannon/TypeScript/public/fourslash/tests/util"
+	"github.com/zshannon/TypeScript/public/ls"
+	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/testutil"
+)
+
+func TestCompletionListInImportClause03(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `declare module "M1" {
+    export var abc: number;
+    export var def: string;
+}
+
+declare module "M2" {
+    import { abc/**/ } from "M1";
+}`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyCompletions(t, "", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Exact: []fourslash.CompletionsExpectedItem{
+				"abc",
+				"def",
+				&lsproto.CompletionItem{
+					Label:    "type",
+					SortText: new(string(ls.SortTextGlobalsOrKeywords)),
+				},
+			},
+		},
+	})
+}

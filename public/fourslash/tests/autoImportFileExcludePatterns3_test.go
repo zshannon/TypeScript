@@ -1,0 +1,77 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/fourslash"
+	. "github.com/zshannon/TypeScript/public/fourslash/tests/util"
+	"github.com/zshannon/TypeScript/public/ls"
+	"github.com/zshannon/TypeScript/public/ls/lsutil"
+	"github.com/zshannon/TypeScript/public/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/testutil"
+)
+
+func TestAutoImportFileExcludePatterns3(t *testing.T) {
+	t.Skip("Known failing fourslash test")
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `// @lib: es5
+// @module: commonjs
+// @Filename: /ambient1.d.ts
+declare module "foo" {
+   export const x = 1;
+}
+// @Filename: /ambient2.d.ts
+declare module "foo" {
+   export const y = 2;
+}
+// @Filename: /index.ts
+/**/`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyCompletions(t, "", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Exact: CompletionGlobalsPlus(
+				[]fourslash.CompletionsExpectedItem{
+					&lsproto.CompletionItem{
+						Label: "x",
+						Data: &lsproto.CompletionItemData{
+							AutoImport: &lsproto.AutoImportFix{
+								ModuleSpecifier: "foo",
+							},
+						},
+						AdditionalTextEdits: fourslash.AnyTextEdits,
+						SortText:            new(string(ls.SortTextAutoImportSuggestions)),
+					},
+					&lsproto.CompletionItem{
+						Label: "y",
+						Data: &lsproto.CompletionItemData{
+							AutoImport: &lsproto.AutoImportFix{
+								ModuleSpecifier: "foo",
+							},
+						},
+						AdditionalTextEdits: fourslash.AnyTextEdits,
+						SortText:            new(string(ls.SortTextAutoImportSuggestions)),
+					},
+				}, false,
+			),
+		},
+		UserPreferences: &lsutil.UserPreferences{AutoImportFileExcludePatterns: []string{"/**/ambient1.d.ts"}},
+	})
+	f.VerifyCompletions(t, "", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Exact: CompletionGlobals,
+		},
+		UserPreferences: &lsutil.UserPreferences{AutoImportFileExcludePatterns: []string{"/**/ambient*"}},
+	})
+}

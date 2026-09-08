@@ -42,7 +42,7 @@ type ProgramOptions struct {
 	CreateCheckerPool           func(*Program) CheckerPool
 	TypingsLocation             string
 	ProjectName                 string
-	Tracing                     *tracing.Tracing
+	Tracing                     tracing.PerformanceTracer
 	// SkipModuleResolution avoids all module and type reference resolution while
 	// still collecting import metadata needed for emit.
 	SkipModuleResolution bool
@@ -511,7 +511,7 @@ func (p *Program) GetContentMapper(file *ast.SourceFile) *contentmapper.Mapper {
 func (p *Program) ContentMapperExtensions() []string         { return p.opts.Config.ContentMapperExtensions() }
 func (p *Program) CommandLine() *tsoptions.ParsedCommandLine { return p.opts.Config }
 func (p *Program) Host() CompilerHost                        { return p.opts.Host }
-func (p *Program) Tracing() *tracing.Tracing                 { return p.opts.Tracing }
+func (p *Program) Tracing() tracing.PerformanceTracer        { return p.opts.Tracing }
 func (p *Program) GetConfigFileParsingDiagnostics() []*ast.Diagnostic {
 	return slices.Clip(p.opts.Config.GetConfigFileParsingDiagnostics())
 }
