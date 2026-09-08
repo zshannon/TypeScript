@@ -1,0 +1,25 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestFixExactOptionalUnassignableProperties7(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `// @strictNullChecks: true
+// @exactOptionalPropertyTypes: true
+// @Filename: fixExactOptionalUnassignableProperties6.ts
+class Feh {
+    _requestFinished(error?: string) {
+        this._finishedPromiseCallback({ error/**/ });
+    }
+    private _finishedPromiseCallback: (arg: { error?: string }) => void = () => {};
+}`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyCodeFixNotAvailable(t)
+}

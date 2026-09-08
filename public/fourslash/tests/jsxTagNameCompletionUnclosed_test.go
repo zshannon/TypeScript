@@ -1,0 +1,156 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	. "github.com/zshannon/TypeScript/public/v7/fourslash/tests/util"
+	"github.com/zshannon/TypeScript/public/v7/ls/lsutil"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestJsxTagNameCompletionUnclosed(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `//@Filename: file.tsx
+interface NestedInterface {
+    Foo: NestedInterface;
+    (props: {}): any;
+}
+
+declare const Foo: NestedInterface;
+
+function fn1() {
+    return <Foo>
+        </*1*/
+    </Foo>
+}
+function fn2() {
+    return <Foo>
+        <Fo/*2*/
+    </Foo>
+}
+function fn3() {
+    return <Foo>
+        <Foo./*3*/
+    </Foo>
+}
+function fn4() {
+    return <Foo>
+        <Foo.F/*4*/
+    </Foo>
+}
+function fn5() {
+    return <Foo>
+        <Foo.Foo./*5*/
+    </Foo>
+}
+function fn6() {
+    return <Foo>
+        <Foo.Foo.F/*6*/
+    </Foo>
+}`
+	f, done := fourslash.NewFourslash(t, fourslash.GetDefaultCapabilitiesWithOptions(&fourslash.ClientCapabilitiesOptions{
+		CompletionItem: &lsproto.ClientCompletionItemOptions{
+			SnippetSupport: new(true),
+		},
+	}), content)
+	defer done()
+	f.VerifyCompletions(t, "1", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Includes: []fourslash.CompletionsExpectedItem{
+				&lsproto.CompletionItem{
+					Label:  "Foo",
+					Detail: new("const Foo: NestedInterface"),
+				},
+			},
+		},
+		UserPreferences: &lsutil.UserPreferences{JsxAttributeCompletionStyle: lsutil.JsxAttributeCompletionStyleBraces},
+	})
+	f.VerifyCompletions(t, "2", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Includes: []fourslash.CompletionsExpectedItem{
+				&lsproto.CompletionItem{
+					Label:  "Foo",
+					Detail: new("const Foo: NestedInterface"),
+				},
+			},
+		},
+		UserPreferences: &lsutil.UserPreferences{JsxAttributeCompletionStyle: lsutil.JsxAttributeCompletionStyleBraces},
+	})
+	f.VerifyCompletions(t, "3", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Includes: []fourslash.CompletionsExpectedItem{
+				&lsproto.CompletionItem{
+					Label:  "Foo",
+					Detail: new("(property) NestedInterface.Foo: NestedInterface"),
+				},
+			},
+		},
+		UserPreferences: &lsutil.UserPreferences{JsxAttributeCompletionStyle: lsutil.JsxAttributeCompletionStyleBraces},
+	})
+	f.VerifyCompletions(t, "4", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Includes: []fourslash.CompletionsExpectedItem{
+				&lsproto.CompletionItem{
+					Label:  "Foo",
+					Detail: new("(property) NestedInterface.Foo: NestedInterface"),
+				},
+			},
+		},
+		UserPreferences: &lsutil.UserPreferences{JsxAttributeCompletionStyle: lsutil.JsxAttributeCompletionStyleBraces},
+	})
+	f.VerifyCompletions(t, "5", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Includes: []fourslash.CompletionsExpectedItem{
+				&lsproto.CompletionItem{
+					Label:  "Foo",
+					Detail: new("(property) NestedInterface.Foo: NestedInterface"),
+				},
+			},
+		},
+		UserPreferences: &lsutil.UserPreferences{JsxAttributeCompletionStyle: lsutil.JsxAttributeCompletionStyleBraces},
+	})
+	f.VerifyCompletions(t, "6", &fourslash.CompletionsExpectedList{
+		IsIncomplete: false,
+		ItemDefaults: &fourslash.CompletionsExpectedItemDefaults{
+			CommitCharacters: &DefaultCommitCharacters,
+			EditRange:        Ignored,
+		},
+		Items: &fourslash.CompletionsExpectedItems{
+			Includes: []fourslash.CompletionsExpectedItem{
+				&lsproto.CompletionItem{
+					Label:  "Foo",
+					Detail: new("(property) NestedInterface.Foo: NestedInterface"),
+				},
+			},
+		},
+		UserPreferences: &lsutil.UserPreferences{JsxAttributeCompletionStyle: lsutil.JsxAttributeCompletionStyleBraces},
+	})
+}

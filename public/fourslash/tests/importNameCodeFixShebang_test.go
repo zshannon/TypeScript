@@ -1,0 +1,29 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestImportNameCodeFixShebang(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `// @Filename: /a.ts
+export const foo = 0;
+// @Filename: /b.ts
+[|#!/usr/bin/env node
+foo/**/|]`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.GoToFile(t, "/a.ts")
+	f.GoToFile(t, "/b.ts")
+	f.VerifyImportFixAtPosition(t, []string{
+		`#!/usr/bin/env node
+
+import { foo } from "./a";
+
+foo`,
+	}, nil /*preferences*/)
+}

@@ -1,0 +1,25 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestGetOccurrencesOfAnonymousFunction2(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `//global foo definition
+function foo() {}
+
+(function f/*local*/oo(): number {
+    return foo(); // local foo reference
+})
+//global foo references
+fo/*global*/o();
+var f = foo;`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyBaselineDocumentHighlights(t, nil /*preferences*/, "local", "global")
+}

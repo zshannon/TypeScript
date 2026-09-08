@@ -1,3 +1,23 @@
+# TypeScript compiler packages for Go
+
+This public fork of `microsoft/TypeScript` makes the compiler's Go packages available to ordinary Go modules. The original compiler remains in `tsc/`; `public/` is a generated module with the same package implementations and consistent public import paths.
+
+```go
+import (
+    "github.com/zshannon/TypeScript/public/v7/ast"
+    "github.com/zshannon/TypeScript/public/v7/compiler"
+    "github.com/zshannon/TypeScript/public/v7/parser"
+)
+```
+
+Every compiler package is projected, including nested packages. There is no curated wrapper API. Go package versions match upstream TypeScript versions. Upstream compiler interfaces can change. The server, esbuild, Oxc React compiler, and Docker deployment are maintained separately.
+
+1. [Package generation and consumption](docs/compiler-packages.md)
+2. [Upstream sync setup](docs/compiler-updates.md)
+3. [External Go consumer example](scripts/testdata/public-consumer)
+
+## Upstream project
+
 
 # TypeScript
 

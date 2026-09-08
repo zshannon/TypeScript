@@ -1,0 +1,34 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestRenameJsOverloadedFunctionParameter(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `// @allowJs: true
+// @checkJs: true
+// @Filename: foo.js
+/**
+ * @overload
+ * @param {number} x
+ * @returns {number}
+ *
+ * @overload
+ * @param {string} x
+ * @returns {string} 
+ *
+ * @param {unknown} x
+ * @returns {unknown} 
+ */
+function foo(x/**/) {
+  return x;
+}`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyBaselineRename(t, nil /*preferences*/, "")
+}

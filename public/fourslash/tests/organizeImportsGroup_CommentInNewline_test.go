@@ -1,0 +1,36 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/lsp/lsproto"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestOrganizeImportsGroup_CommentInNewline(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `// polyfill
+import c from "C";
+// not polyfill
+import d from "D";
+import a from "A";
+import b from "B";
+
+console.log(a, b, c, d)`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyOrganizeImports(t,
+		`// polyfill
+import c from "C";
+// not polyfill
+import a from "A";
+import b from "B";
+import d from "D";
+
+console.log(a, b, c, d)`,
+		lsproto.CodeActionKindSourceOrganizeImportsTs,
+		nil,
+	)
+}

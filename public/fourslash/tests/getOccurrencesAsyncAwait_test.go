@@ -1,0 +1,35 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	. "github.com/zshannon/TypeScript/public/v7/fourslash/tests/util"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestGetOccurrencesAsyncAwait(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `[|async|] function f() {
+ [|await|] 100;
+ [|a/**/wait|] [|await|] 200;
+class Foo {
+    async memberFunction() {
+        await 1;
+    }
+}
+ return [|await|] async function () {
+   await 300;
+ }
+}
+async function g() {
+    await 300;
+    async function f() {
+        await 400;
+    }
+}`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyBaselineDocumentHighlights(t, nil /*preferences*/, ToAny(f.Ranges())...)
+}

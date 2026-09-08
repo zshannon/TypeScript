@@ -40,7 +40,7 @@ type emitter struct {
 	emitResult         EmitResult
 	forceEmit          bool
 	writeFile          func(fileName string, text string, data *WriteFileData) error
-	tr                 *tracing.Tracing
+	tr                 tracing.PerformanceTracer
 }
 
 func (e *emitter) emit() {

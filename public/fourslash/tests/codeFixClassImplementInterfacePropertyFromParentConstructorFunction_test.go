@@ -1,0 +1,21 @@
+package fourslash_test
+
+import (
+	"testing"
+
+	"github.com/zshannon/TypeScript/public/v7/fourslash"
+	"github.com/zshannon/TypeScript/public/v7/testutil"
+)
+
+func TestCodeFixClassImplementInterfacePropertyFromParentConstructorFunction(t *testing.T) {
+	t.Parallel()
+	defer testutil.RecoverAndFail(t, "Panic on fourslash test")
+	const content = `class A {
+    constructor(public x: number) { }
+}
+
+class B implements A {[| |]}`
+	f, done := fourslash.NewFourslash(t, nil /*capabilities*/, content)
+	defer done()
+	f.VerifyCodeFixNotAvailable(t)
+}
