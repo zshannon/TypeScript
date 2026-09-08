@@ -1,6 +1,7 @@
 name: Compiler packages
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -55,6 +56,9 @@ jobs:
           bash -n .github/scripts/merge-typescript-upstream.sh
           bash -n .github/scripts/test-merge-typescript-upstream.sh
           .github/scripts/test-merge-typescript-upstream.sh
+
+      - name: Test release versioning and repeat-run behavior
+        run: ruby scripts/test-release-workflow.rb
 
       - name: Test external public-module consumer
         run: scripts/test-public-module.sh

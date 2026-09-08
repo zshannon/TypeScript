@@ -19,7 +19,7 @@ go get github.com/zshannon/TypeScript/public/v7@v7.0.2
 
 This command requires the corresponding fork release to have been published. The module path ends in `/v7` because Go requires the major version in paths for version 2 and later. The Git tag is `public/v7.0.2`, Go's standard tag for a module located in `public/`; the package version is `v7.0.2`. There is no independent fork version counter.
 
-The version comes from `tsc/internal/core/version.go`. Current upstream main is `7.1.0-dev`; it cannot be published as `7.0.2`. Stable releases use the corresponding upstream release source with the fork's reviewed changes. Development commits can still be selected by commit when needed.
+The version comes from `tsc/internal/core/version.go`. Current upstream main is `7.1.0-dev`; it cannot be published as `7.0.2`. Stable releases use the corresponding upstream release source with the fork's reviewed changes. Development versions retain the upstream prerelease version, such as `v7.1.0-dev`. Each merge to main runs publication; an already-published version is left unchanged.
 
 Import packages directly, for example `github.com/zshannon/TypeScript/public/v7/compiler`. No Microsoft module replacement or matching internal import prefix is needed. The executable example under `scripts/testdata/public-consumer` parses and typechecks TypeScript with embedded standard libraries, including a deliberate type error assertion.
 

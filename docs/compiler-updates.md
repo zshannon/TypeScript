@@ -13,22 +13,21 @@ Only our workflow files belong in `.github/workflows`. Each source merge preserv
 
 Review and merge source-update PRs with **Create a merge commit**, preserving their upstream merge parent. Nothing automatically merges PRs.
 
-## Configure the update bot
+## Enable the automation
 
-1. Create a GitHub App owned by the repository owner with repository Contents, Pull requests, and Workflows read/write permissions. Install it only on `zshannon/TypeScript`.
-2. Set repository Actions variable `UPSTREAM_SYNC_APP_ID` to its App ID and secret `UPSTREAM_SYNC_APP_PRIVATE_KEY` to its full PEM private key.
-3. Merge the compiler validation workflows before enabling Actions so only our workflows are active in the default branch.
-4. Manually run the source-sync workflow and confirm that its PR starts the compiler checks. An App token is used so normal PR workflows trigger; the default Actions token would suppress those downstream events.
+Merge the setup PR into `main`. The weekly workflow runs every Monday at 17:00 UTC and can also be run manually. In Settings → Actions → General, enable **Allow GitHub Actions to create and approve pull requests**. No GitHub App or additional secrets are required.
 
-The App installation and settings are separate repository setup steps. Preparing or pushing this branch does not establish them.
+The bot uses the built-in repository token to maintain its upstream PR. It explicitly dispatches compiler validation for the update branch, so validation does not depend on automatic triggering from bot-created PR events. It never approves or merges its own PR.
 
-## Consume updates
+## Releases from main
 
-The Go release number matches TypeScript exactly: TypeScript `7.0.2` produces Go module version `v7.0.2`. The public module uses `github.com/zshannon/TypeScript/public/v7`, with Go's standard submodule tag `public/v7.0.2`.
+Every push to `main`, including each merged PR, runs the release workflow. It tests the compiler and external Go consumer before tagging the exact validated commit. The version comes from the compiler source: TypeScript `7.0.2` becomes Go `v7.0.2`; development source `7.1.0-dev` becomes `v7.1.0-dev`.
 
-Run **Release public Go module** with the reviewed stable release branch selected in GitHub Actions. The workflow uses that selected revision, with no separately entered version number. It reads the compiler source version and validates it against the corresponding official Microsoft release tag before tagging a reviewed fork revision. Stable release source must descend from that upstream tag. It checks generation and external module consumption before publishing, and never overwrites a tag. Development main (`7.1.0-dev` when this branch was prepared) cannot be labeled as a stable `7.0.2` release.
+Stable versions are checked against the matching official Microsoft release tag. Prerelease versions are checked against the common upstream source ancestor. The public module uses the matching major suffix, such as `github.com/zshannon/TypeScript/public/v7`, and Go's standard submodule tag, such as `public/v7.0.2`.
 
-After a release is published, the server can use `go get github.com/zshannon/TypeScript/public/v7@v7.0.2`. Source-update PRs still track upstream main; stable release preparation starts from the matching upstream release tag and carries the fork's reviewed compiler and publication changes.
+If that TypeScript version already has a public tag, the run leaves it unchanged and skips publication. Go versions are immutable: multiple merges with the same TypeScript version do not produce additional releases. There is no independent fork version counter.
+
+The normal flow is: review an upstream PR, merge it with a merge commit, and let the release workflow run. There is no separate release branch to maintain. Manual release dispatch remains available for a reviewed historical release snapshot.
 
 ## Server migration
 
