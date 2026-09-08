@@ -1,4 +1,4 @@
-name: Sync stable TypeScript releases
+name: Sync TypeScript upstream
 
 on:
   schedule:
@@ -15,6 +15,44 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  development:
+    name: Merge upstream main into development
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Merge upstream development source
+        run: |
+          set -euo pipefail
+          merge_script=$(mktemp)
+          trap 'rm -f "$merge_script"' EXIT
+          cp .github/scripts/merge-typescript-upstream.sh "$merge_script"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin '+refs/heads/development:refs/remotes/origin/development'
+          git fetch --no-tags https://github.com/microsoft/TypeScript.git \
+            '+refs/heads/main:refs/remotes/microsoft-upstream/main'
+          git checkout -B development origin/development
+          bash "$merge_script" origin/development refs/remotes/microsoft-upstream/main
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: tsc/go.mod
+          cache-dependency-path: tsc/go.sum
+      - name: Refresh development packages and push
+        run: |
+          set -euo pipefail
+          go run ./scripts/export-go.go
+          git add --all -- public
+          if ! git diff --cached --quiet; then
+            git commit -m "Regenerate development compiler packages"
+          fi
+          git push origin HEAD:refs/heads/development
+
   update:
     runs-on: ubuntu-24.04
     timeout-minutes: 30

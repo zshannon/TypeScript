@@ -19,3 +19,9 @@ The historical `public/v7.1.0-dev` tag is not a supported release channel. It is
 ## Server
 
 The server lives in the private `zshannon/tsgo-server` repository. Its dependency-update PRs consume the stable public module versions. The server's own SemVer, esbuild/Oxc updates, image publishing, and Fly/exe.dev deployments are independent of this compiler repository.
+
+## Development branch
+
+The same weekly workflow independently merges Microsoft’s `main` into `development`, preserving the fork’s workflows and regenerating its public packages. Merge conflicts fail the job without pushing a partial update. Development updates never publish a release.
+
+Stable release PRs target our `main` and merge the exact upstream release tag, not the development branch. This excludes unreleased commits even when Microsoft’s `main` has advanced past the stable release.
